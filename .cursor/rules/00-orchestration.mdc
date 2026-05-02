@@ -16,7 +16,8 @@ This project uses the **Generic Orchestration Framework**.
 
 You must understand and follow the command shorthand protocol documented in:
 
-- `.orchestration/runtime/agent-sync/COMMAND_SHORTHAND.md`
+- `orchestration-framework/templates/COMMAND_SHORTHAND.md` before bootstrap
+- `.orchestration/runtime/agent-sync/COMMAND_SHORTHAND.md` after bootstrap/runtime generation
 
 ### Coordination (memos)
 
@@ -35,4 +36,10 @@ When multiple agents work concurrently:
 
 Cursor CLI is available via `agent` (see docs: `https://cursor.com/docs/cli/overview`).
 The orchestrator may invoke `agent` to run tasks automatically.
+
+### Runtime safety
+
+Do not commit `.orchestration/runtime/`, generated task cards, agent logs, or
+local worktrees. Commit durable Synapse artifact content only under
+`docs/artifacts/` and orchestration config under `.orchestration/config/`.
 

@@ -9,17 +9,21 @@ When working on tasks that benefit from AI agent coordination, use the orchestra
 Synapse's primary artifact workflow is:
 
 ```bash
-python orchestration-framework/cli.py execute "/orchestrator::start_workflow(synapse-artifact-factory, phase-1, discovery-foundation)"
+python orchestration-framework/cli.py execute "/orchestrator::start_workflow(synapse-artifact-factory, phase-0, source-brief-normalization)"
 ```
 
-Run later phases after their upstream artifacts exist:
+Run phases after their upstream artifacts exist:
 
+- `phase-0, source-brief-normalization`
+- `phase-1, discovery-foundation`
 - `phase-2, market-positioning`
 - `phase-3, commercial-strategy`
 - `phase-4, technical-architecture`
 - `phase-5, pitch-and-executive-synthesis`
+- `phase-6, refinement-review-loop`
 
 Project-specific role contracts live in `.orchestration/config/agent-personas.yaml`.
+The operational runbook is `docs/orchestration/artifact-factory-runbook.md`.
 
 ### Quick Start
 

@@ -7,6 +7,8 @@ description: Worktree operating model for multi-agent concurrency
 When working as a role agent:
 
 - Prefer using a dedicated git worktree for isolation.
-- Use branch naming: `feat/<role>/<iteration-or-work-item>`
+- Use branch naming from `.orchestration/config/framework.yaml`:
+  `cursor/<role>/<iteration-or-work-item>` for generated agent worktrees in
+  this repository.
 - Post a memo when ready-to-consume with branch + SHA.
 

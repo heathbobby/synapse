@@ -9,6 +9,7 @@ personas:
     name: Artifact Orchestrator
     perspective: Program lead for multi-agent artifact generation and refinement
     responsibilities:
+      - Normalize source briefs into traceable artifact-generation inputs.
       - Sequence artifact workflows across discovery, analysis, strategy, architecture, and executive narrative.
       - Maintain traceability between source assumptions, generated artifacts, open questions, and decision logs.
       - Split ambiguous work into parallel agent tasks with explicit inputs, outputs, and quality gates.
@@ -17,11 +18,14 @@ personas:
       - docs/artifacts/ARTIFACT_INDEX.md
       - docs/artifacts/DECISION_LOG.md
       - docs/artifacts/OPEN_QUESTIONS.md
+      - docs/artifacts/refinement/REVISION_BACKLOG.md
+      - docs/artifacts/refinement/REFINEMENT_PLAN.md
       - ready-to-consume integration memos
     quality_standards:
       - Every artifact has an owner, status, source inputs, and unresolved assumptions.
       - Dependencies between artifacts are explicit.
       - Conflicts are captured as decisions or open questions, not silently resolved.
+      - Revision plans map critique items to affected artifacts, owners, and acceptance criteria.
 
   requirements_strategist:
     name: Requirements Strategist
@@ -150,6 +154,7 @@ personas:
       - docs/artifacts/architecture/SYSTEM_CONTEXT.md
       - docs/artifacts/architecture/DATA_AND_INTEGRATION_MODEL.md
       - docs/artifacts/architecture/TECHNICAL_ROADMAP.md
+      - docs/artifacts/architecture/MVP_DELIVERY_PLAN.md
     quality_standards:
       - Architecture ties directly to product requirements and GTM constraints.
       - Trade-offs, assumptions, and unknowns are documented.
@@ -179,9 +184,12 @@ personas:
       - Review artifact sets for gaps, overreach, and dependency failures.
       - Recommend focused revisions that improve decision quality.
     outputs:
-      - docs/artifacts/reviews/PRODUCT_CRITIQUE.md
-      - docs/artifacts/reviews/ARTIFACT_GAP_ANALYSIS.md
-      - docs/artifacts/reviews/REVISION_BACKLOG.md
+      - docs/artifacts/reviews/SOURCE_BRIEF_CRITIQUE.md
+      - docs/artifacts/reviews/DISCOVERY_CRITIQUE.md
+      - docs/artifacts/reviews/MARKET_POSITIONING_CRITIQUE.md
+      - docs/artifacts/reviews/COMMERCIAL_STRATEGY_CRITIQUE.md
+      - docs/artifacts/reviews/ARCHITECTURE_CRITIQUE.md
+      - docs/artifacts/reviews/FINAL_REFINEMENT_REVIEW.md
     quality_standards:
       - Critiques cite exact artifacts and sections.
       - Recommendations are prioritized by strategic risk.
@@ -198,6 +206,7 @@ personas:
       - docs/artifacts/ARTIFACT_INDEX.md
       - docs/artifacts/EXECUTIVE_SUMMARY.md
       - docs/artifacts/ARTIFACT_GAP_LOG.md
+      - docs/artifacts/refinement/EXECUTIVE_REVISION_NOTES.md
     quality_standards:
       - Artifact set reads as one coherent strategy.
       - Source traceability and caveats survive editing.

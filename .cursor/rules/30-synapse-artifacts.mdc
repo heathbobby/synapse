@@ -12,12 +12,24 @@ This repository uses `orchestration-framework/` plus project-specific workflow c
 - Persona library: `.orchestration/config/agent-personas.yaml`
 - Source brief: `work_items/synapse-product-brief.md`
 - Artifact root: `docs/artifacts/`
+- Runbook: `docs/orchestration/artifact-factory-runbook.md`
 
 Start an iteration with:
 
 ```text
 /orchestrator::start_workflow(synapse-artifact-factory, <phase-id>, <iteration-id>)
 ```
+
+Use the canonical sequence from `framework.yaml` unless the orchestrator creates
+a bounded refinement experiment:
+
+1. `phase-0/source-brief-normalization`
+2. `phase-1/discovery-foundation`
+3. `phase-2/market-positioning`
+4. `phase-3/commercial-strategy`
+5. `phase-4/technical-architecture`
+6. `phase-5/pitch-and-executive-synthesis`
+7. `phase-6/refinement-review-loop`
 
 ### Artifact quality bar
 
@@ -26,9 +38,15 @@ Agents should produce decision-grade documents, not brainstorming notes:
 - State assumptions, evidence, risks, and confidence.
 - Use explicit open questions where source material is missing.
 - Cross-link dependencies between artifacts.
+- Keep artifact filenames aligned with `.orchestration/config/workflows/synapse-artifact-factory.yaml`.
+- Use `docs/artifacts/templates/ARTIFACT_TEMPLATE.md` and `REVIEW_TEMPLATE.md`.
 - Prefer markdown documents that can be versioned and refined.
 - Post a `ready-to-consume` memo when the artifact is useful for downstream agents.
 
 ### Refinement loop
 
-Use `product_critic` and `executive_editor` passes to identify contradictions, missing evidence, and narrative gaps before treating any artifact as ready-to-merge.
+Use `product_critic` and `executive_editor` passes to identify contradictions,
+missing evidence, and narrative gaps before treating any artifact as ready-to-merge.
+The phase-6 refinement loop must convert critique/gap-log findings into a
+revision backlog, refinement plan, updated decision/open-question logs, and a
+final readiness review.

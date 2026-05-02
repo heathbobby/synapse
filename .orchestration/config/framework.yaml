@@ -15,7 +15,7 @@ coordination:
     - blocked
 
 worktrees:
-  enabled: true
+  enabled: false
   location: "../Synapse.worktrees"
   cleanup_on_merge: true
   branch_prefix: "cursor"
@@ -24,6 +24,8 @@ orchestration:
   workflows_dir: ".orchestration/config/workflows"
   iterations_dir: ".orchestration/runtime/iterations"
   work_items_dir: "work_items"
+  framework_dir: "orchestration-framework"
+  allow_auto_apply_ready: false
   
 integration:
   target_branch_pattern: "integration/{date}"
@@ -46,12 +48,10 @@ status:
   status_dir: ".orchestration/runtime/status"
 
 updates:
-  # Where to pull framework updates from. Set this in your project if you want automated updates.
-  # source:
-  #   type: "git"
-  #   repo: "https://github.com/<org>/<repo>.git"
-  #   ref: "main"
-  source: null
+  source:
+    type: "git"
+    repo: "https://github.com/heathbobby/cursor_orchestrator.git"
+    ref: "main"
   # Minimal payload to keep the target project lean.
   payload:
     - "bootstrap.py"
@@ -82,7 +82,7 @@ token_budget:
 cursor:
   enabled: true
   rules_dir: ".cursor/rules"
-  auto_open_worktrees: true
+  auto_open_worktrees: false
   boot_prompts_in_worktree: true
   agent_command: "agent"
   agent_output_format: "text"
@@ -110,5 +110,55 @@ roles:
 custom:
   artifact_root: "docs/artifacts"
   source_brief: "work_items/synapse-product-brief.md"
+  source_brief_conventions:
+    canonical_id: "SYN-BRIEF-001"
+    expected_sections:
+      - Purpose
+      - Current Known Context
+      - Artifact Goals
+      - Working Assumptions
+      - Inputs to Add Later
+    normalization_outputs:
+      - "docs/artifacts/ARTIFACT_INDEX.md"
+      - "docs/artifacts/DECISION_LOG.md"
+      - "docs/artifacts/OPEN_QUESTIONS.md"
   artifact_workflows:
     - synapse-artifact-factory
+  artifact_families:
+    root:
+      - "docs/artifacts/ARTIFACT_INDEX.md"
+      - "docs/artifacts/DECISION_LOG.md"
+      - "docs/artifacts/OPEN_QUESTIONS.md"
+      - "docs/artifacts/EXECUTIVE_SUMMARY.md"
+      - "docs/artifacts/ARTIFACT_GAP_LOG.md"
+    requirements: "docs/artifacts/requirements"
+    customer: "docs/artifacts/customer"
+    market: "docs/artifacts/market"
+    gtm: "docs/artifacts/gtm"
+    business: "docs/artifacts/business"
+    architecture: "docs/artifacts/architecture"
+    pitch: "docs/artifacts/pitch"
+    reviews: "docs/artifacts/reviews"
+    refinement: "docs/artifacts/refinement"
+  workflow_sequence:
+    - phase: "phase-0"
+      iteration: "source-brief-normalization"
+      purpose: "Normalize source brief, artifact index, decisions, and open questions."
+    - phase: "phase-1"
+      iteration: "discovery-foundation"
+      purpose: "Generate requirements, personas, JTBD, assumptions, and customer research."
+    - phase: "phase-2"
+      iteration: "market-positioning"
+      purpose: "Generate market sizing, competitive analysis, positioning, and differentiation."
+    - phase: "phase-3"
+      iteration: "commercial-strategy"
+      purpose: "Generate GTM, pricing, launch, business case, revenue, unit economics, and risk artifacts."
+    - phase: "phase-4"
+      iteration: "technical-architecture"
+      purpose: "Generate architecture, data/integration, roadmap, security, threat, and compliance artifacts."
+    - phase: "phase-5"
+      iteration: "pitch-and-executive-synthesis"
+      purpose: "Generate pitch outline, investor narrative/Q&A, executive summary, and gap log."
+    - phase: "phase-6"
+      iteration: "refinement-review-loop"
+      purpose: "Turn critique/gap logs into revision backlog, refinement plan, and final readiness review."
