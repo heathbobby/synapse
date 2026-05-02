@@ -1,0 +1,263 @@
+# Synapse Artifact Factory
+#
+# This workflow adapts the cursor_orchestrator framework to Synapse's
+# business/product artifact pipeline. Each iteration can be run independently
+# once its dependencies are available:
+#
+#   python orchestration-framework/cli.py execute "/orchestrator::start_workflow(synapse-artifact-factory, phase-1, discovery-foundation)"
+
+name: synapse-artifact-factory
+description: Multi-agent workflow for requirements refinement, market analysis, GTM, business case, pitch, and technical architecture artifacts.
+
+phases:
+  - id: phase-1
+    name: Discovery Foundation
+    description: Convert the raw Synapse brief into shared requirements and audience facts.
+
+    iterations:
+      - id: discovery-foundation
+        name: Requirements and Audience Foundation
+        description: Establish the first-pass problem, user, workflow, and research frame.
+        goal: |
+          Create the common foundation that downstream market, GTM, business,
+          pitch, and architecture agents can rely on. Resolve ambiguity in the
+          source brief by making assumptions explicit instead of inventing facts.
+
+        agents:
+          - role: requirements_strategist
+            inputs:
+              - "work_items/synapse-product-brief.md"
+            deliverables:
+              - path: "docs/artifacts/requirements/REQUIREMENTS.md"
+                description: "Problem statement, personas, goals, functional and non-functional requirements, acceptance criteria."
+              - path: "docs/artifacts/requirements/ASSUMPTIONS_AND_OPEN_QUESTIONS.md"
+                description: "Explicit assumptions, unknowns, and questions for the human sponsor."
+            token_budget: 30000
+
+          - role: customer_researcher
+            inputs:
+              - "work_items/synapse-product-brief.md"
+            deliverables:
+              - path: "docs/artifacts/research/CUSTOMER_RESEARCH_PLAN.md"
+                description: "Target segments, interview hypotheses, survey prompts, and validation plan."
+              - path: "docs/artifacts/research/JOBS_TO_BE_DONE.md"
+                description: "JTBD map, pains, triggers, alternatives, and desired outcomes."
+            token_budget: 26000
+
+          - role: product_critic
+            inputs:
+              - "work_items/synapse-product-brief.md"
+            deliverables:
+              - path: "docs/artifacts/reviews/DISCOVERY_CRITIQUE.md"
+                description: "Risks, weak assumptions, missing evidence, and suggested refinement loops."
+            token_budget: 18000
+
+        completion_criteria:
+          requirements:
+            - "Requirements artifact identifies target users, core workflows, acceptance criteria, constraints, and non-goals."
+            - "Customer research artifacts include falsifiable hypotheses and concrete interview or survey questions."
+            - "Critique artifact lists the strongest objections and what evidence would resolve them."
+            - "All artifacts distinguish sourced facts, assumptions, and open questions."
+
+  - id: phase-2
+    name: Market and Positioning
+    description: Analyze the market, competitive context, segmentation, and strategic positioning.
+
+    iterations:
+      - id: market-positioning
+        name: Market Analysis and Positioning
+        description: Produce market, competitive, and positioning artifacts.
+        goal: |
+          Transform the discovery foundation into a pragmatic market view:
+          who Synapse serves first, what alternatives it displaces, and what
+          differentiated position the product should claim.
+
+        agents:
+          - role: market_intelligence_analyst
+            inputs:
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+              - "docs/artifacts/research/JOBS_TO_BE_DONE.md"
+            deliverables:
+              - path: "docs/artifacts/market/MARKET_ANALYSIS.md"
+                description: "Market definition, ICP segments, TAM/SAM/SOM assumptions, trends, buying triggers, and risks."
+            token_budget: 32000
+
+          - role: competitive_intelligence_analyst
+            inputs:
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+              - "docs/artifacts/market/MARKET_ANALYSIS.md"
+            deliverables:
+              - path: "docs/artifacts/market/COMPETITIVE_ANALYSIS.md"
+                description: "Competitor categories, alternatives, differentiation matrix, and wedge opportunities."
+              - path: "docs/artifacts/market/POSITIONING_BRIEF.md"
+                description: "Category, value proposition, messaging pillars, and proof points."
+            token_budget: 32000
+
+          - role: product_critic
+            inputs:
+              - "docs/artifacts/market/MARKET_ANALYSIS.md"
+              - "docs/artifacts/market/COMPETITIVE_ANALYSIS.md"
+              - "docs/artifacts/market/POSITIONING_BRIEF.md"
+            deliverables:
+              - path: "docs/artifacts/reviews/MARKET_POSITIONING_CRITIQUE.md"
+                description: "Review for unsupported claims, weak differentiation, and customer-message mismatch."
+            token_budget: 18000
+
+        completion_criteria:
+          requirements:
+            - "Market analysis states all sizing assumptions and avoids unsupported precision."
+            - "Competitive analysis covers direct competitors, substitutes, and status-quo alternatives."
+            - "Positioning brief includes target customer, category, key benefit, differentiation, and proof."
+            - "Critique identifies at least three strategic risks and concrete mitigation or validation steps."
+
+  - id: phase-3
+    name: Commercial Strategy
+    description: Convert positioning into go-to-market strategy and an investable business case.
+
+    iterations:
+      - id: commercial-strategy
+        name: GTM Strategy and Business Case
+        description: Produce GTM and business case artifacts that connect market insight to execution.
+        goal: |
+          Define how Synapse should reach early customers, what motions should
+          be tested first, and what economic case supports continued investment.
+
+        agents:
+          - role: gtm_strategist
+            inputs:
+              - "docs/artifacts/market/POSITIONING_BRIEF.md"
+              - "docs/artifacts/market/MARKET_ANALYSIS.md"
+              - "docs/artifacts/research/CUSTOMER_RESEARCH_PLAN.md"
+            deliverables:
+              - path: "docs/artifacts/gtm/GO_TO_MARKET_STRATEGY.md"
+                description: "ICP, channels, launch sequence, pricing hypotheses, sales motion, funnel metrics, and experiments."
+            token_budget: 34000
+
+          - role: business_case_analyst
+            inputs:
+              - "docs/artifacts/gtm/GO_TO_MARKET_STRATEGY.md"
+              - "docs/artifacts/market/MARKET_ANALYSIS.md"
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+            deliverables:
+              - path: "docs/artifacts/business/BUSINESS_CASE.md"
+                description: "Investment thesis, revenue model, cost model, unit economics, milestones, and decision gates."
+              - path: "docs/artifacts/business/RISKS_AND_MITIGATIONS.md"
+                description: "Commercial, product, operational, and technical risk register."
+            token_budget: 34000
+
+          - role: product_critic
+            inputs:
+              - "docs/artifacts/gtm/GO_TO_MARKET_STRATEGY.md"
+              - "docs/artifacts/business/BUSINESS_CASE.md"
+            deliverables:
+              - path: "docs/artifacts/reviews/COMMERCIAL_STRATEGY_CRITIQUE.md"
+                description: "Review of GTM feasibility, economics, milestones, and hidden assumptions."
+            token_budget: 18000
+
+        completion_criteria:
+          requirements:
+            - "GTM strategy includes a testable launch sequence, ICP, channels, messaging, and funnel metrics."
+            - "Business case includes assumptions, revenue/cost drivers, milestones, and decision gates."
+            - "Risk register has owners or next-step validation actions for major risks."
+            - "Critique challenges both optimistic and pessimistic assumptions."
+
+  - id: phase-4
+    name: Solution Architecture
+    description: Translate refined requirements and business constraints into technical architecture.
+
+    iterations:
+      - id: technical-architecture
+        name: Technical Architecture and Delivery Plan
+        description: Produce architecture artifacts for MVP planning and engineering alignment.
+        goal: |
+          Define a credible technical path for Synapse that supports the
+          requirements and business strategy while calling out unresolved
+          product and implementation risks.
+
+        agents:
+          - role: technical_architect
+            inputs:
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+              - "docs/artifacts/business/BUSINESS_CASE.md"
+            deliverables:
+              - path: "docs/artifacts/architecture/TECHNICAL_ARCHITECTURE.md"
+                description: "System context, components, data flows, integrations, scalability, and trade-offs."
+              - path: "docs/artifacts/architecture/MVP_DELIVERY_PLAN.md"
+                description: "Milestone plan, sequencing, engineering risks, and validation checkpoints."
+            token_budget: 42000
+
+          - role: security_architect
+            inputs:
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+              - "docs/artifacts/architecture/TECHNICAL_ARCHITECTURE.md"
+            deliverables:
+              - path: "docs/artifacts/architecture/SECURITY_AND_PRIVACY_MODEL.md"
+                description: "Threat model, data classification, access controls, compliance considerations, and privacy risks."
+            token_budget: 30000
+
+          - role: product_critic
+            inputs:
+              - "docs/artifacts/architecture/TECHNICAL_ARCHITECTURE.md"
+              - "docs/artifacts/architecture/MVP_DELIVERY_PLAN.md"
+              - "docs/artifacts/architecture/SECURITY_AND_PRIVACY_MODEL.md"
+            deliverables:
+              - path: "docs/artifacts/reviews/ARCHITECTURE_CRITIQUE.md"
+                description: "Review of architecture feasibility, product fit, risk, and execution sequencing."
+            token_budget: 18000
+
+        completion_criteria:
+          requirements:
+            - "Architecture includes context, component, data, integration, and deployment views."
+            - "MVP delivery plan sequences the smallest valuable release and follow-on validation."
+            - "Security model covers data sensitivity, access boundaries, abuse cases, and compliance assumptions."
+            - "Critique identifies architecture decisions that need sponsor or engineering confirmation."
+
+  - id: phase-5
+    name: Executive Narrative
+    description: Synthesize artifact set into a pitch deck narrative and final executive-ready package.
+
+    iterations:
+      - id: pitch-and-executive-synthesis
+        name: Pitch Deck and Artifact Synthesis
+        description: Build executive narrative from the refined artifact set.
+        goal: |
+          Convert the complete artifact set into a concise, internally
+          consistent executive story and identify the final gaps that should be
+          addressed before external use.
+
+        agents:
+          - role: pitch_deck_strategist
+            inputs:
+              - "docs/artifacts/requirements/REQUIREMENTS.md"
+              - "docs/artifacts/market/POSITIONING_BRIEF.md"
+              - "docs/artifacts/gtm/GO_TO_MARKET_STRATEGY.md"
+              - "docs/artifacts/business/BUSINESS_CASE.md"
+              - "docs/artifacts/architecture/TECHNICAL_ARCHITECTURE.md"
+            deliverables:
+              - path: "docs/artifacts/pitch/PITCH_DECK_OUTLINE.md"
+                description: "Slide-by-slide narrative, key messages, evidence needs, and speaker notes."
+              - path: "docs/artifacts/pitch/INVESTOR_NARRATIVE.md"
+                description: "Narrative memo connecting problem, solution, market, traction plan, business case, and ask."
+            token_budget: 36000
+
+          - role: executive_editor
+            inputs:
+              - "docs/artifacts/pitch/PITCH_DECK_OUTLINE.md"
+              - "docs/artifacts/pitch/INVESTOR_NARRATIVE.md"
+              - "docs/artifacts/reviews/DISCOVERY_CRITIQUE.md"
+              - "docs/artifacts/reviews/MARKET_POSITIONING_CRITIQUE.md"
+              - "docs/artifacts/reviews/COMMERCIAL_STRATEGY_CRITIQUE.md"
+              - "docs/artifacts/reviews/ARCHITECTURE_CRITIQUE.md"
+            deliverables:
+              - path: "docs/artifacts/EXECUTIVE_SUMMARY.md"
+                description: "Concise executive summary and recommended next decisions."
+              - path: "docs/artifacts/ARTIFACT_GAP_LOG.md"
+                description: "Remaining gaps, unresolved questions, evidence needs, and proposed next workflow iterations."
+            token_budget: 28000
+
+        completion_criteria:
+          requirements:
+            - "Pitch outline covers problem, solution, customer, market, differentiation, GTM, economics, architecture credibility, team/ask placeholders, and next milestones."
+            - "Investor narrative is internally consistent with requirements, market, GTM, business case, and architecture artifacts."
+            - "Executive summary is concise and decision-oriented."
+            - "Gap log prioritizes unresolved evidence needs and recommended follow-up iterations."

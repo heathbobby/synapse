@@ -1,0 +1,114 @@
+# Generic Orchestration Framework Configuration (Project)
+
+project:
+  name: "Synapse"
+  trunk_branch: "main"
+  description: "Artifact-driven multi-agent refinement for Synapse product, market, GTM, business, pitch, and architecture work."
+
+coordination:
+  agent_sync_dir: ".orchestration/runtime/agent-sync"
+  memo_format: "YYYY-MM-DD_{role}_{topic}.md"
+  status_values:
+    - draft
+    - ready-to-consume
+    - ready-to-merge
+    - blocked
+
+worktrees:
+  enabled: true
+  location: "../Synapse.worktrees"
+  cleanup_on_merge: true
+  branch_prefix: "cursor"
+
+orchestration:
+  workflows_dir: ".orchestration/config/workflows"
+  iterations_dir: ".orchestration/runtime/iterations"
+  work_items_dir: "work_items"
+  
+integration:
+  target_branch_pattern: "integration/{date}"
+  merge_gates:
+    - validate_deliverables
+    - check_token_budget
+    - check_test_coverage
+  auto_merge_to_trunk: false
+
+commands:
+  task_cards_dir: ".orchestration/runtime/agent-sync/tasks"
+  task_archive_dir: ".orchestration/runtime/agent-sync/tasks/_archive"
+
+knowledge:
+  knowledge_dir: ".orchestration/knowledge"
+  evaluations_dir: ".orchestration/knowledge/evaluations"
+  iterations_dir: ".orchestration/knowledge/iterations"
+
+status:
+  status_dir: ".orchestration/runtime/status"
+
+updates:
+  # Where to pull framework updates from. Set this in your project if you want automated updates.
+  # source:
+  #   type: "git"
+  #   repo: "https://github.com/<org>/<repo>.git"
+  #   ref: "main"
+  source: null
+  # Minimal payload to keep the target project lean.
+  payload:
+    - "bootstrap.py"
+    - "cli.py"
+    - "requirements.txt"
+    - "config.yaml.example"
+    - "templates"
+    - "tools"
+
+providers:
+  github:
+    api_base: "https://api.github.com"
+    token_env_var: "GITHUB_TOKEN"
+    default_repo: null # e.g. "owner/name"
+    default_state: "open"
+    per_page: 100
+    max_issues: 200
+    include_pull_requests: false
+    dest_subdir: "github/issues"
+
+token_budget:
+  default_per_agent: 20000
+  risk_thresholds:
+    low: 70      # <70% utilization
+    medium: 85   # 70-85% utilization
+    high: 100    # 85-100% utilization
+
+cursor:
+  enabled: true
+  rules_dir: ".cursor/rules"
+  auto_open_worktrees: true
+  boot_prompts_in_worktree: true
+  agent_command: "agent"
+  agent_output_format: "text"
+  agent_max_parallel: 3
+
+validation:
+  file_existence: true
+  file_size_min: 100  # bytes
+  completion_criteria: true
+
+roles:
+  - artifact_orchestrator
+  - requirements_strategist
+  - market_intelligence_analyst
+  - customer_researcher
+  - competitive_intelligence_analyst
+  - gtm_strategist
+  - business_case_analyst
+  - pitch_deck_strategist
+  - technical_architect
+  - security_architect
+  - product_critic
+  - executive_editor
+
+custom:
+  artifact_root: "docs/artifacts"
+  source_brief: "work_items/synapse-product-brief.md"
+  artifact_workflows:
+    - synapse-artifact-factory

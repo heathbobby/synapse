@@ -1,0 +1,34 @@
+---
+description: Synapse artifact-factory workflow and agent persona conventions
+---
+
+## Synapse artifact-factory conventions
+
+This repository uses `orchestration-framework/` plus project-specific workflow config to coordinate artifact generation and refinement.
+
+### Primary workflow
+
+- Workflow config: `.orchestration/config/workflows/synapse-artifact-factory.yaml`
+- Persona library: `.orchestration/config/agent-personas.yaml`
+- Source brief: `work_items/synapse-product-brief.md`
+- Artifact root: `docs/artifacts/`
+
+Start an iteration with:
+
+```text
+/orchestrator::start_workflow(synapse-artifact-factory, <phase-id>, <iteration-id>)
+```
+
+### Artifact quality bar
+
+Agents should produce decision-grade documents, not brainstorming notes:
+
+- State assumptions, evidence, risks, and confidence.
+- Use explicit open questions where source material is missing.
+- Cross-link dependencies between artifacts.
+- Prefer markdown documents that can be versioned and refined.
+- Post a `ready-to-consume` memo when the artifact is useful for downstream agents.
+
+### Refinement loop
+
+Use `product_critic` and `executive_editor` passes to identify contradictions, missing evidence, and narrative gaps before treating any artifact as ready-to-merge.
