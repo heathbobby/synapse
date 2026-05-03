@@ -1,0 +1,65 @@
+# Synapse Product Development Workflow
+#
+# Product-facing workflow. Use this for Synapse product specifications.
+# Keep cursor_orchestrator/orchestration-framework as tooling context only.
+
+name: synapse-product-development
+description: Product-focused workflow for defining Synapse MVPs, capabilities, user experiences, runtime contracts, and implementation-ready product artifacts.
+
+phases:
+  - id: phase-1
+    name: MVP1 AI Coworker Workspace
+    description: "Define the first Synapse product slice: an operator workspace for one approved expert workflow."
+
+    iterations:
+      - id: mvp1-ai-coworker-workspace
+        name: MVP1 AI Coworker Workspace Definition
+        description: Reframe the first product MVP around the Synapse operator experience, not the orchestration tooling internals.
+        goal: |
+          Define Synapse MVP1 as a product experience where a human operator can
+          define a destination, select one reusable expert workflow, attach
+          approved knowledge, dispatch AI coworkers, monitor progress, review
+          outputs, and capture learning. Treat the existing orchestration
+          framework as prototype scaffolding and process evidence only.
+
+        agents:
+          - role: product_owner
+            inputs:
+              - "docs/refinement/iteration-inputs/product-mvp1-ai-coworker-workspace.md"
+            deliverables:
+              - path: "docs/product/MVP1/AI_COWORKER_WORKSPACE.md"
+                description: "Product specification for the MVP1 operator workspace, personas, jobs, scope, non-goals, and requirements."
+              - path: "docs/product/MVP1/OPERATOR_JOURNEY.md"
+                description: "End-to-end operator journey from destination definition through learning capture."
+            token_budget: 30000
+
+          - role: ux_designer
+            inputs:
+              - "docs/refinement/iteration-inputs/product-mvp1-ai-coworker-workspace.md"
+            deliverables:
+              - path: "docs/product/MVP1/WORKSPACE_UX_SPEC.md"
+                description: "UX structure, screens/states, information architecture, user actions, empty/error states, and review surfaces."
+            token_budget: 28000
+
+          - role: technical_architect
+            inputs:
+              - "docs/refinement/iteration-inputs/product-mvp1-ai-coworker-workspace.md"
+            deliverables:
+              - path: "docs/product/MVP1/RUNTIME_CONTRACTS.md"
+                description: "Product runtime contracts for workspace state, workflow run state, task state, knowledge context, approvals, audit, and learning events."
+            token_budget: 32000
+
+          - role: qa_lead
+            inputs:
+              - "docs/refinement/iteration-inputs/product-mvp1-ai-coworker-workspace.md"
+            deliverables:
+              - path: "docs/product/MVP1/ACCEPTANCE_CRITERIA.md"
+                description: "Product acceptance criteria and readiness gates for the MVP1 AI coworker workspace."
+            token_budget: 24000
+
+        completion_criteria:
+          requirements:
+            - "Artifacts define Synapse MVP1 as a product workspace, not as cursor_orchestrator internals."
+            - "Operator journey covers destination definition, workflow selection, knowledge attachment, dispatch, monitoring, review, and learning capture."
+            - "Runtime contracts identify product state and audit concepts without committing to storage, provider, tenancy, or deployment technology."
+            - "Acceptance criteria are testable and trace to Synapse product requirements and capability map."
