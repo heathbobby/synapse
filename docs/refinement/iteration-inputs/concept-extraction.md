@@ -19,15 +19,22 @@ without treating raw notes as final requirements.
 
 ### `requirements_strategist`
 
-- `docs/refinement/iteration-inputs/concept-extraction.md`
+- `research/Synapse_Initial_Chat_Summary.md`
+- `research/CONCEPT_TO_IMPLEMENTATION_PLAYBOOK.md`
+- `work_items/synapse-product-brief.md`
 
 ### `architect`
 
-- `docs/refinement/iteration-inputs/concept-extraction.md`
+- `research/Synapse_Initial_Chat_Summary.md`
+- `research/CONCEPT_TO_IMPLEMENTATION_PLAYBOOK.md`
+- `work_items/synapse-product-brief.md`
+- `docs/requirements/PRODUCT_REQUIREMENTS.md` after the requirements strategist updates it
 
 ### `dependency_analyst`
 
-- `docs/refinement/iteration-inputs/concept-extraction.md`
+- `docs/requirements/PRODUCT_REQUIREMENTS.md`
+- `docs/architecture/ARCHITECTURE.md`
+- `docs/planning/DELIVERY_BACKLOG.md`
 
 ## Completion criteria summary
 
