@@ -20,6 +20,15 @@ workflow-run database, product API, event bus, schema registry, telemetry
 backend, approval automation, provider runtime, tenancy model, compliance
 implementation, deployment system, or legacy adapter.
 
+## Product reframing note
+
+This roadmap describes the enabling orchestration package, not the full Synapse
+product roadmap. The product roadmap is now anchored in
+`docs/product/MVP_STRATEGY.md`, `docs/product/SYNAPSE_PRODUCT_REQUIREMENTS.md`,
+and `docs/product/PRODUCT_CAPABILITY_MAP.md`. Use this document to understand
+how the repository can keep generating and validating Synapse product artifacts;
+use the product docs to decide what Synapse itself should become.
+
 ## MVP1 readiness summary
 
 | Area | Readiness | What is ready | What must happen next |

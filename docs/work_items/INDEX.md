@@ -11,10 +11,15 @@
   - `docs/planning/EXECUTION_ORCHESTRATION.md`
 
 This index is the canonical entry point for executable Synapse work items. It
-uses the `E##` epic convention and `US-E##-###` story convention. MVP1 is scoped
-to the canonical concept-to-implementation pipeline: canonical documentation,
-workflow/task-packet definition, deterministic validation, backlog readiness,
-and orchestration handoff for one initiative.
+uses the `E##` epic convention and `US-E##-###` story convention.
+
+## Product/tooling boundary
+
+Synapse is the product: an operational substrate for agentic coworker workflows.
+`cursor_orchestrator` is enabling tooling used in this repository to generate and
+refine product artifacts. Work items must not treat the orchestration framework
+itself as the final Synapse product surface unless the story explicitly says it
+is an internal enabling foundation.
 
 ## Readiness and confidence policy
 
@@ -29,19 +34,14 @@ and orchestration handoff for one initiative.
 
 | Epic | Name | MVP | Readiness status | Requirement trace | Dependencies | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
-| E01 | Canonical Documentation Foundation | MVP1 | Refined | PRD-001, PRD-002; FR-001, FR-002, FR-003, FR-004 | None | Establish canonical doc registry, source attribution, uncertainty labels, immutable-source handling, and open-question tracking. |
-| E02 | Workflow Definition and Task-Packet Model | MVP1 | Ready candidate | PRD-003, PRD-005; FR-005, FR-006, FR-010 | E01; ADR-0011; ADR-0012; ADR-0013 | Define CLI-assisted workflow phases, roles, inputs, deliverables, completion criteria, and bounded agent task packets for the orchestration-framework domain. |
-| E03 | Deterministic Validation and Completion Signals | MVP1 | Draft | PRD-003, PRD-005; FR-007, FR-008, FR-019 | E01, E02; ADR-0014 | Specify objective validation hooks and standardized completion, partial-completion, blocked, and recovery signals. |
-| E04 | Backlog Generation and Readiness Gates | MVP1 | Draft | PRD-008; FR-018, FR-019, FR-020 | E01; partial E02 | Generate traceable epics/stories with readiness gates, dependency notes, risks, and acceptance-quality criteria. |
-| E05 | Orchestration Execution Handoff | MVP1 | Draft | PRD-005, PRD-008; FR-005, FR-006, FR-008, FR-020 | E02, E03, E04 | Package accepted MVP1 contracts into an implementation handoff that states launch order, owners, recovery paths, and remaining blockers. |
-| E06 | Source Inventory and Grounding Model | MVP2 | Deferred | PRD-001, PRD-002, PRD-009; FR-003, FR-010, FR-021, FR-022 | E01, E02 | Prioritize source types and grounding mechanics for repeatable role-agent work. |
-| E07 | SME Persona and Role Template Library | MVP2 | Deferred | PRD-004, PRD-009; FR-009, FR-021 | E02, E06 | Define reusable persona templates and composition rules for role agents. |
-| E08 | Domain Configuration Model | MVP2 | Deferred | PRD-009; FR-021, FR-022 | E02, E07 | Separate domain-specific roles, artifacts, and quality thresholds from the core workflow model. |
-| E09 | Workflow Status and Monitoring Surface | MVP3 | Deferred | PRD-006; FR-013, FR-015 | E02, E03 | Expose workflow, iteration, agent, deliverable, and validation status to human operators. |
-| E10 | Human Approval Checkpoints | MVP3 | Deferred | PRD-006; FR-014, FR-022 | E09 | Define approval classes, pause/resume behavior, and decision recording for high-impact actions. |
-| E11 | Feedback Capture and Improvement Promotion | MVP3 | Deferred | PRD-007; FR-016, FR-017 | E03, E07, E09 | Link iteration outcomes and recurring failures to template, role, workflow, or process improvements. |
-| E12 | Legacy-to-Greenfield Requirement Extraction | MVP4 | Deferred | PRD-010; FR-023 | E01, E06, E08 | Apply Synapse to a validated modernization corpus to extract current-state assumptions and future-state gaps. |
-| E13 | Transition-State Planning Artifacts | MVP4 | Deferred | PRD-010; FR-018, FR-019, FR-023 | E12 | Produce migration planning artifacts only after a concrete legacy-transition use case is validated. |
+| E01 | Internal Orchestration Foundation | MVP0 | Refined | PRD-001, PRD-002; FR-001, FR-002, FR-003, FR-004 | None | Establish canonical docs and CLI-assisted orchestration as the internal artifact-generation substrate. |
+| E02 | Synapse Product MVP Strategy | MVP0 | Ready candidate | PRD-001 through PRD-010 | E01 | Re-anchor MVPs around Synapse product outcomes and keep cursor_orchestrator as tooling. |
+| E03 | Knowledge Grounding Product Core | MVP1 | Draft | PRD-001, PRD-002, PRD-004, PRD-007, PRD-009; FR-010, FR-016, FR-017, FR-021 | E01, E02 | Define approved sources, grounding context, provenance, confidence, freshness, and source promotion for Synapse product workflows. |
+| E04 | Persona and SME Template System | MVP1 | Draft | PRD-004, PRD-009; FR-009, FR-010, FR-021 | E03 | Define reusable SME/persona templates and inheritance/composition rules grounded in approved knowledge. |
+| E05 | Workflow Designer Product Experience | MVP2 | Draft | PRD-003, PRD-005, PRD-006, PRD-009; FR-005, FR-006, FR-013, FR-014, FR-015, FR-022 | E03, E04 | Define human workflow authoring, live monitoring, task assignment, approval gates, and execution visibility as Synapse product capabilities. |
+| E06 | Evented Runtime and Human Approval Model | MVP2 | Deferred | PRD-006, PRD-007, PRD-009; FR-013, FR-014, FR-015, FR-016, FR-017, FR-022 | E05 | Define runtime state, event families, approval decisions, telemetry, and feedback loops without overcommitting infrastructure prematurely. |
+| E07 | Legacy Bridge Workflow Package | MVP3 | Deferred | PRD-010; FR-018, FR-019, FR-020, FR-023 | E03, E05, E06 | Apply Synapse to a validated transition-state modernization use case. |
+| E08 | Productization, Packaging, and Deployment | MVP4 | Deferred | NFR-004, NFR-006, NFR-008 | E03-E07 | Decide SaaS/internal/open-core packaging, tenancy, compliance, deployment, and commercial surfaces. |
 
 ## MVP1 story map
 
@@ -83,7 +83,7 @@ its epic deliverables or story detail:
 
 | ID | Type | Item | Impact |
 | --- | --- | --- | --- |
-| D-WI-001 | Decision | MVP1 delivery mode is CLI-assisted orchestration using `orchestration-framework/cli.py`, generated task cards, runtime memos, and canonical docs. | Unblocks E02 and sizes E05 around CLI-assisted handoff rather than runtime-backed product behavior. |
+| D-WI-001 | Decision | Internal foundation delivery mode is CLI-assisted orchestration using `orchestration-framework/cli.py`, generated task cards, runtime memos, and canonical docs. | Documents the enabling foundation; Synapse product MVP delivery is reframed in `docs/product/MVP_STRATEGY.md`. |
 | D-WI-002 | Decision | The orchestration framework is the first internal domain/initiative for MVP1 workflow templates. | Gives E02/E04 a concrete, source-backed domain without inventing an external customer. |
 | D-WI-003 | Decision | MVP1 metadata is Markdown-first: structured headings and tables with PRD/FR IDs, E##/US-E##-### IDs, confidence, readiness, dependency, owner/reviewer, and validation fields. | Unblocks task-packet and backlog metadata refinement while deferring machine-readable schemas. |
 | D-WI-004 | Decision | Initial validators target required files, required sections, trace markers, ID format, prohibited source mutations, and completion-signal format. | Unblocks E03 validator specification. |

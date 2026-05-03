@@ -93,10 +93,10 @@ gates, and recommended refinement/implementation order for work items using the
 
 | Blocker ID | Type | Affected work | Blocking impact | Recommended resolution path |
 | --- | --- | --- | --- | --- |
-| B-DM-001 | Product/architecture decision | E03, E05; implementation launch | Resolved for MVP1: delivery mode is CLI-assisted orchestration, not docs-only or runtime-backed product behavior. | Use ADR-0011 to scope E03/E05. Runtime-backed behavior remains a later architecture decision. |
-| B-DM-002 | Product decision | E02, E04, E05; later E06-E08 | Resolved for MVP1: the orchestration framework is the first domain/initiative. | Use ADR-0012 and the existing framework workflow/task-card/memo model as the reference domain. |
-| B-DM-003 | Metadata contract decision | E02, E03, E04 | Resolved for MVP1: Markdown-first metadata using structured headings and tables. | Use ADR-0013; defer machine-readable schemas until validators require them. |
-| B-DM-004 | Validation scope decision | E03, E04, E05 | Resolved for initial MVP1: validators target required files, sections, trace markers, ID format, source immutability, and completion signals. | Use ADR-0014; label review-only criteria until automation is feasible. |
+| B-DM-001 | Product/architecture decision | E03, E05; implementation launch | Resolved for internal foundation: delivery mode is CLI-assisted orchestration, not docs-only or runtime-backed product behavior. | Use ADR-0011 to scope E03/E05. Runtime-backed behavior remains a later architecture decision. |
+| B-DM-002 | Product decision | E02, E04, E05; later E06-E08 | Resolved for internal foundation: the orchestration framework is the first domain/initiative. | Use ADR-0012 and the existing framework workflow/task-card/memo model as the reference domain. |
+| B-DM-003 | Metadata contract decision | E02, E03, E04 | Resolved for internal foundation: Markdown-first metadata using structured headings and tables. | Use ADR-0013; defer machine-readable schemas until validators require them. |
+| B-DM-004 | Validation scope decision | E03, E04, E05 | Resolved for internal foundation: validators target required files, sections, trace markers, ID format, source immutability, and completion signals. | Use ADR-0014; label review-only criteria until automation is feasible. |
 | B-DM-005 | Approval owner / governance decision | E04, E05, E10 | Story promotion and open-question closure lack named accountable approvers. | Assign product, architecture, quality, security/privacy, dependency, and integrator reviewers for readiness gates. |
 | B-DM-006 | Runtime/stack/compliance decisions | E05 and any implementation-specific story | Storage, event transport, tenancy, compliance, runtime, UI, and provider choices remain open. | Defer implementation-specific claims or convert them into bounded architecture/security spikes. |
 | B-DM-007 | Source type and grounding priority | E06, E07, E08, E12 | MVP2 and legacy bridge planning cannot commit retrieval, freshness, or source-governance behavior. | Prioritize initial source types after MVP1 task-packet conventions stabilize. |
@@ -132,7 +132,7 @@ gates, and recommended refinement/implementation order for work items using the
 | Gate | Required before | Applies to | Dependency-map interpretation |
 | --- | --- | --- | --- |
 | G0 Canonical foundation readiness | MVP1 refinement/implementation fan-out | E01, then E02-E05 | E01 must be accepted before downstream epics are promoted beyond draft refinement. |
-| G1 MVP1 scope and mode gate | `mvp1-domain-infrastructure` or implementation launch | E02-E05 | Accepted for MVP1: CLI-assisted delivery, orchestration-framework domain, Markdown-first metadata, and initial deterministic validator scope. |
+| G1 MVP1 scope and mode gate | `mvp1-domain-infrastructure` or implementation launch | E02-E05 | Accepted for internal foundation: CLI-assisted delivery, orchestration-framework domain, Markdown-first metadata, and initial deterministic validator scope. Synapse product MVPs are tracked separately in product strategy. |
 | G2 Workflow/task-packet gate | Validation/completion-signal work | E02, E03, E05 | E02 must define workflow and task-packet contracts before E03 and E05 finalize dependent behavior. |
 | G3 Knowledge/persona gate | MVP2 | E06-E08 | Source inventory, persona composition, provenance, freshness, and review/promotion rules must be accepted. |
 | G4 Governance/feedback gate | MVP3 | E09-E11 | Workflow state, event/status mapping, approval classes, and feedback schema must be stable. |

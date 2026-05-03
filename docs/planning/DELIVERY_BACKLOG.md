@@ -44,7 +44,7 @@ the open questions in the PRD are resolved.
 
 | MVP | Candidate goal | Confidence | Primary requirements | Notes |
 | --- | --- | --- | --- | --- |
-| MVP1 | Canonical concept-to-implementation pipeline for one initiative. | Medium | PRD-001, PRD-002, PRD-003, PRD-005, PRD-008; FR-001 to FR-008, FR-018 to FR-020 | Best-supported initial slice because current repo and playbook center on canonical docs, role-agent orchestration, validation, and backlog readiness. |
+| MVP0 | Internal canonical concept-to-implementation foundation for this repository. | High | PRD-001, PRD-002, PRD-003, PRD-005, PRD-008; FR-001 to FR-008, FR-018 to FR-020 | Completed as enabling process/tooling foundation; not the Synapse product MVP. |
 | MVP2 | Configurable knowledge-grounding and SME/persona template layer. | Medium | PRD-004, PRD-009; FR-009, FR-010, FR-021, FR-022 | Supported conceptually; source types, retrieval mechanics, and inheritance model are open. |
 | MVP3 | Workflow monitoring, approvals, and feedback-loop hardening. | Medium-low | PRD-006, PRD-007; FR-013 to FR-017 | Supported by concept summary and playbook, but UI/runtime choices remain unknown. |
 | MVP4 | Legacy-bridge / transition-state workflow package. | Low | PRD-010; FR-023 | Source-backed use-case hypothesis; requires a validated customer/domain and source corpus. |
@@ -163,8 +163,8 @@ Use these gates before promoting any story seed to implementation-ready status:
 | OQ ID | Question | Blocks |
 | --- | --- | --- |
 | OQ-BL-001 | What is the first deployment/product mode: internal platform, SaaS, open-core framework, or services-enabled tool? | MVP boundaries, NFRs, architecture, GTM. |
-| D-BL-001 | The orchestration framework itself is the first MVP1 domain/initiative for workflow templates. | E02, E04, E07, E08. |
-| D-BL-002 | MVP1 delivery mode is CLI-assisted workflow foundation using canonical documentation and the existing framework. | E05 and implementation sizing. |
+| D-BL-001 | The orchestration framework itself is the first internal foundation domain/initiative for workflow templates. | Internal foundation E02/E04 and later product strategy references. |
+| D-BL-002 | MVP0/internal foundation delivery mode is CLI-assisted workflow foundation using canonical documentation and the existing framework. | Preserves process/tooling boundary; product MVP implementation sizing should reference `docs/product/MVP_STRATEGY.md`. |
 | OQ-BL-004 | What source systems/file types must be supported first? | E06 and FR-010. |
 | OQ-BL-005 | What approval model and autonomy limits are acceptable? | E09, E10, security architecture. |
 | OQ-BL-006 | Which compliance/security constraints apply before customer data is handled? | Architecture, NFRs, release planning. |

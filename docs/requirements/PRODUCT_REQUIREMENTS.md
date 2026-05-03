@@ -135,14 +135,18 @@ The sources mention these ideas but do not provide enough detail for implementat
 
 ## 8. Release / MVP Framing
 
-The current sources do not define committed MVP boundaries. Use the following as a candidate sequencing model for backlog refinement, not as final product scope.
+The product MVP strategy is now maintained in `docs/product/MVP_STRATEGY.md`.
+The table below is the canonical product framing for Synapse. The
+`cursor_orchestrator` framework remains the delivery/orchestration tool used to
+create and refine these artifacts; it is not the Synapse product surface.
 
 | Candidate MVP | Goal | Confidence | Notes |
 | --- | --- | --- | --- |
-| MVP1 | Canonical concept-to-implementation pipeline for a single initiative. | Medium | Strongly supported by current repository state and playbook. Needs user confirmation. |
-| MVP2 | Configurable role/template and knowledge-grounding layer for repeatable SME agents. | Medium | Supported by concept pillars; implementation details unknown. |
-| MVP3 | Workflow execution, monitoring, approvals, and feedback loop hardening. | Medium-low | Supported conceptually; UX/runtime choices unknown. |
-| MVP4 | Legacy-bridge / transition-state workflow package. | Low | Source-backed use case, but target customer and domain details are missing. |
+| Foundation / MVP0 | Establish canonical truth, product strategy, architecture, backlog, and orchestration process. | High | Mostly complete. This is setup for product definition, not the shipped product. |
+| MVP1 | Define and validate Synapse's product requirements and first operational-substrate use case using CLI-assisted orchestration. | High | Reframe current framework-heavy docs around Synapse product outcomes. |
+| MVP2 | Define knowledge grounding and SME/persona management for AI coworkers. | Medium-high | Started with source inventory and grounding model; must connect to product persona behavior. |
+| MVP3 | Define workflow execution, monitoring, human approvals, feedback loops, and product UX/API architecture. | Medium | This is the first major product-runtime architecture package. |
+| MVP4 | Define the legacy bridge / transition-state package for validated modernization scenarios. | Medium-low | Source-backed use case, but requires concrete customer/domain validation. |
 
 ## 9. Acceptance Criteria for This Requirements Baseline
 
@@ -158,7 +162,7 @@ This document is acceptable for the concept-extraction iteration when:
 | OQ ID | Question | Why it matters | Blocking? |
 | --- | --- | --- | --- |
 | OQ-001 | Who is the initial target customer or internal adopter? | Determines personas, workflows, security posture, pricing, and GTM. | Yes for product launch scope. |
-| OQ-002 | What is the first domain to operationalize: software delivery, IT operations, product strategy, legacy modernization, or another domain? | Determines MVP1 workflows and artifact templates. | Yes for implementation planning. |
+| OQ-002 | What is the first external/customer-facing domain to operationalize after the internal orchestration-framework reference domain? | Determines product workflow templates and GTM wedge. | Yes for product launch planning. |
 | OQ-003 | Should Synapse be delivered as a SaaS product, internal platform, open-core framework, or services-enabled tool? | Determines tenancy, deployment, support, and commercial requirements. | Yes for architecture and GTM. |
 | OQ-004 | What systems should Synapse integrate with first? | Determines integration epics and event contracts. | Yes for MVP execution scope. |
 | OQ-005 | What level of autonomy is acceptable for agents in the first release? | Determines approval model, permissions, audit, and safety requirements. | Yes for workflow runtime. |

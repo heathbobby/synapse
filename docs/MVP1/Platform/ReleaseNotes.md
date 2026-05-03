@@ -15,6 +15,11 @@ packets, task-packet conventions, runtime memos, deterministic validation
 expectations, review gates, and work-item sequencing to move one initiative
 from concept refinement toward implementation.
 
+This release is an **enabling foundation**, not the Synapse product MVP itself.
+It uses `cursor_orchestrator`-style mechanics to create the contracts that later
+Synapse product MVPs consume. Product MVP definitions live in
+`docs/product/MVP_STRATEGY.md`.
+
 MVP1 does not ship a hosted Synapse product runtime. It does not include a
 visual workflow designer UI, workflow-run database, product API, event bus,
 schema registry, telemetry backend, approval automation, provider runtime,

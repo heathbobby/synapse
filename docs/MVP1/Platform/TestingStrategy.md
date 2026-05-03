@@ -292,7 +292,7 @@ workflow, task packet, contract, or story is ready for implementation.
 - Runtime task cards, memos, logs, command outputs, and branch/SHA references are
   operational evidence; material conclusions must be summarized into canonical
   docs before downstream implementation relies on them.
-- The orchestration framework remains the first MVP1 domain and validation
+- The orchestration framework remains the internal foundation domain and validation
   target.
 
 ## Open decisions

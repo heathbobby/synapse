@@ -217,7 +217,7 @@ handoff work starts from reviewed contracts.
 | --- | --- | --- | --- |
 | A-E01-001 | Assumption | `docs/` is the canonical implementation-truth root for MVP1. | Enables E01-E05 to proceed without inventing external registry mechanics. |
 | D-E01-001 | Decision | MVP1 delivery is CLI-assisted orchestration using the existing framework. | Unblocks E02 and constrains E05 handoff scope. |
-| D-E01-002 | Decision | The orchestration framework is the first MVP1 domain/initiative. | Gives E02/E04 concrete templates and backlog examples. |
+| D-E01-002 | Decision | The orchestration framework is the first internal foundation domain/initiative. | Gives the internal foundation concrete templates and backlog examples; product MVPs are tracked separately. |
 | D-E01-003 | Decision | MVP1 canonical metadata is Markdown-first, using structured headings and tables. | Unblocks task packets and validators; machine-readable schemas are deferred. |
 | D-E01-004 | Decision | Initial deterministic validators target files, sections, trace IDs, ID formats, source immutability, and completion signals. | Gives E03 a concrete validator scope. |
 | OQ-E01-002 | Open question | Which sponsor or role approves open-question resolution and story promotion? | Affects readiness governance for E04/E05; default role-based approvers are proposed in technical gates. |

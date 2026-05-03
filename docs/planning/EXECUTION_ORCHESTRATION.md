@@ -110,17 +110,17 @@ Required before launching MVP1 refinement:
 
 Required before `mvp1-domain-infrastructure`:
 
-- **Accepted**: MVP1 delivery mode is CLI-assisted using the existing
+- **Accepted**: MVP0/internal foundation delivery mode is CLI-assisted using the existing
   orchestration framework. Runtime-backed product behavior is deferred until
   MVP1 contracts and validators are stable. [ADR-0011]
 - **Accepted**: the orchestration framework itself is the first internal
   domain/initiative that will drive workflow templates. [ADR-0012]
-- **Accepted**: MVP1 uses Markdown-first canonical metadata: structured
+- **Accepted**: The internal foundation uses Markdown-first canonical metadata: structured
   headings and tables for PRD/FR IDs, E##/US-E##-### IDs, source confidence,
   readiness status, dependencies, owners/reviewers, and validation status.
   Machine-readable front matter/schema extraction is deferred to a later spike
   if E03 validators require it. [ADR-0013]
-- **Accepted**: initial deterministic validators should check required files,
+- **Accepted**: initial internal-foundation validators should check required files,
   required sections/headings, PRD/FR trace markers, E##/US-E##-### ID format,
   prohibited `raw/`/`research/` modifications, and completion-signal format.
   Review-only criteria remain labeled until automation is feasible. [ADR-0014]
