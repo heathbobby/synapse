@@ -297,3 +297,41 @@ phases:
       - Operational runbook covers monitoring, alerting, incidents, rollback, dependencies, and ownership.
       - Release notes and implementation roadmap synthesize MVP1 scope, gaps, and readiness.
       - MVP1 can be audited end-to-end from requirements through operations.
+- id: phase-8
+  name: MVP2 Iteration 1 - Source Inventory and Grounding
+  description: Begin MVP2 by defining source inventory, grounding model, and knowledge-promotion standards.
+  iterations:
+  - id: mvp2-iteration-01-source-grounding
+    name: MVP2 Source Inventory and Grounding Model
+    description: Prioritize source types and define knowledge grounding contracts for repeatable SME agents.
+    goal: Define the first MVP2 knowledge-grounding foundation that can consume MVP1 canonical artifacts, classify source
+      types, preserve provenance and freshness, and prepare persona/template work without selecting a runtime knowledge store.
+    agents:
+    - role: data_architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp2-iteration-01-source-grounding.md
+      deliverables:
+      - path: docs/MVP2/Knowledge/SourceInventory.md
+        description: Prioritized source inventory, source classes, ownership, freshness, confidence, and MVP2 ingestion boundaries.
+      - path: docs/MVP2/Knowledge/GroundingModel.md
+        description: Technology-neutral knowledge grounding model with provenance, confidence, freshness, retrieval/use contracts,
+          and open decisions.
+      token_budget: 30000
+    - role: standards_curator
+      inputs:
+      - docs/refinement/iteration-inputs/mvp2-iteration-01-source-grounding.md
+      deliverables:
+      - path: docs/standards/KNOWLEDGE_GROUNDING_STANDARDS.md
+        description: Reusable standards for source promotion, evidence classes, SME grounding, freshness, review, and learning
+          promotion.
+      token_budget: 24000
+    completion_criteria:
+      requirements:
+      - Source inventory prioritizes MVP1 canonical docs, orchestration config, work items, standards, decisions, memos/log
+        references, and future raw/external sources.
+      - Grounding model defines provenance, confidence, freshness, review, promotion, and consumption contracts without choosing
+        storage or retrieval technology.
+      - Knowledge grounding standards describe how sources become approved knowledge and how repeated learnings update templates,
+        personas, workflows, or backlog gates.
+      - Future runtime knowledge store, retrieval, embeddings, tenancy, compliance, and source-system connectors are marked
+        open or future scope.
