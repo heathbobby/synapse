@@ -100,8 +100,9 @@ S4, S6, S8]
   signal work proceeds.
 - **Unsafe**: E03 before E02, E05 handoff before E02-E04 validate, or any
   implementation commitment before MVP1 mode is selected.
-- **Gate**: MVP1 requires the first domain/initiative, delivery mode, metadata
-  contract, and validator scope decisions. [S2, S4, S5]
+- **Gate**: MVP1 G1 decisions are accepted: CLI-assisted delivery, the
+  orchestration-framework domain, Markdown-first metadata, and initial validator
+  scope. [ADR-0011, ADR-0012, ADR-0013, ADR-0014]
 
 ### MVP2: Knowledge grounding and SME/persona templates
 
@@ -164,10 +165,11 @@ S4, S6, S8]
    canonical foundation and explicitly accept G0.
 2. Assign single-file owners for each canonical doc family; allow parallel input
    through memos or disjoint work-item files.
-3. Resolve MVP1 delivery mode and first domain/initiative before launching
-   `mvp1-domain-infrastructure`.
-4. Define the work-item/task-packet metadata contract before parallelizing
-   backlog expansion.
+3. Use the accepted MVP1 delivery mode and first domain/initiative before
+   launching `mvp1-domain-infrastructure`: CLI-assisted orchestration over the
+   orchestration-framework domain.
+4. Use the Markdown-first work-item/task-packet metadata contract before
+   parallelizing backlog expansion.
 5. Use parallel preparation for the next iteration, but refresh prepared context
    from validated upstream outputs immediately before launch.
 6. Defer visual UI, storage, event transport, tenancy, compliance-sensitive

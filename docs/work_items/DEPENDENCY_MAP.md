@@ -42,8 +42,7 @@ gates, and recommended refinement/implementation order for work items using the
 3. **Backlog readiness can refine in parallel only after E01**: E04 may overlap
    with late E02 review when write targets are disjoint, but it must reconcile
    with E02 task-packet metadata before promotion. [S2, S6, S7]
-4. **Open decisions constrain implementation**: unresolved MVP1 delivery mode,
-   first domain/initiative, metadata format, validator scope, product mode,
+4. **Open decisions constrain implementation**: unresolved product mode beyond MVP1,
    compliance, tenancy, storage, event transport, runtime, and integration
    choices must block implementation-specific claims or become bounded spikes.
    [S5, S6, S7, S8, S9]
@@ -56,10 +55,10 @@ gates, and recommended refinement/implementation order for work items using the
 | Epic | MVP | Readiness | Upstream dependencies | Downstream unlocks | Current blockers / constraints |
 | --- | --- | --- | --- | --- | --- |
 | E01 Canonical Documentation Foundation | MVP1 | Refined | None | E02, E03, E04, E05, E06, E12 | Metadata format and approval-owner questions remain open but do not block E01 refinement. |
-| E02 Workflow Definition and Task-Packet Model | MVP1 | Draft | E01 | E03, E05; informs E04 | Requires accepted canonical paths, metadata expectations, source/uncertainty labels, and quality gate from E01. |
-| E03 Deterministic Validation and Completion Signals | MVP1 | Draft | E01, E02 | E05; supports E04 quality promotion | Blocked by stable E02 task-packet/workflow contracts and initial validator-scope decision. |
+| E02 Workflow Definition and Task-Packet Model | MVP1 | Ready candidate | E01; ADR-0011; ADR-0012; ADR-0013 | E03, E05; informs E04 | G1 decisions accepted: CLI-assisted delivery, orchestration-framework domain, Markdown-first metadata, source/uncertainty labels, and E01 quality gate. |
+| E03 Deterministic Validation and Completion Signals | MVP1 | Draft | E01, E02; ADR-0014 | E05; supports E04 quality promotion | Initial validator scope is accepted; detailed checks still depend on stable E02 task-packet/workflow contracts. |
 | E04 Backlog Generation and Readiness Gates | MVP1 | Draft | E01; partial E02 | E05; implementation-ready backlog candidates | Requires E01 traceability/readiness semantics; must reconcile readiness/dependency fields with E02 metadata. |
-| E05 Orchestration Execution Handoff | MVP1 | Draft | E02, E03, E04 | MVP1 implementation launch decision | Blocked until E02-E04 validate and MVP1 delivery mode/first domain are decided. |
+| E05 Orchestration Execution Handoff | MVP1 | Draft | E02, E03, E04 | MVP1 CLI-assisted launch package | Blocked until E02-E04 validate; scope is CLI-assisted handoff for the orchestration-framework domain. |
 | E06 Source Inventory and Grounding Model | MVP2 | Deferred | E01, E02 | E07, E08, E12 | Deferred until MVP1 task-packet conventions are stable and first source types are prioritized. |
 | E07 SME Persona and Role Template Library | MVP2 | Deferred | E02, E06 | E08, E11 | Unsafe before workflow/task-packet conventions and source grounding are stable. |
 | E08 Domain Configuration Model | MVP2 | Deferred | E02, E07 | E12; supports reusable domain adaptation | Deferred until persona composition and domain configuration decisions are accepted. |
@@ -94,10 +93,10 @@ gates, and recommended refinement/implementation order for work items using the
 
 | Blocker ID | Type | Affected work | Blocking impact | Recommended resolution path |
 | --- | --- | --- | --- | --- |
-| B-DM-001 | Product/architecture decision | E03, E05; implementation launch | MVP1 cannot be sized or handed off until delivery mode is chosen: docs-only, CLI-assisted, or runtime-backed. | Resolve during G1; if unresolved, keep E03/E05 technology-neutral and mark implementation blocked. |
-| B-DM-002 | Product decision | E02, E04, E05; later E06-E08 | First domain/initiative is not selected, limiting concrete workflow templates and backlog examples. | Use this repository's concept-to-implementation workflow as the internal reference if no external adopter is ready. |
-| B-DM-003 | Metadata contract decision | E02, E03, E04 | Markdown-only versus machine-readable metadata affects task packets, validators, and readiness fields. | Accept a minimum Markdown contract for backlog refinement; sequence machine-readable metadata as a later spike if needed. |
-| B-DM-004 | Validation scope decision | E03, E04, E05 | Validators beyond file existence, required sections, and traceability are not yet selected. | Define initial deterministic checks and label review-only criteria. |
+| B-DM-001 | Product/architecture decision | E03, E05; implementation launch | Resolved for MVP1: delivery mode is CLI-assisted orchestration, not docs-only or runtime-backed product behavior. | Use ADR-0011 to scope E03/E05. Runtime-backed behavior remains a later architecture decision. |
+| B-DM-002 | Product decision | E02, E04, E05; later E06-E08 | Resolved for MVP1: the orchestration framework is the first domain/initiative. | Use ADR-0012 and the existing framework workflow/task-card/memo model as the reference domain. |
+| B-DM-003 | Metadata contract decision | E02, E03, E04 | Resolved for MVP1: Markdown-first metadata using structured headings and tables. | Use ADR-0013; defer machine-readable schemas until validators require them. |
+| B-DM-004 | Validation scope decision | E03, E04, E05 | Resolved for initial MVP1: validators target required files, sections, trace markers, ID format, source immutability, and completion signals. | Use ADR-0014; label review-only criteria until automation is feasible. |
 | B-DM-005 | Approval owner / governance decision | E04, E05, E10 | Story promotion and open-question closure lack named accountable approvers. | Assign product, architecture, quality, security/privacy, dependency, and integrator reviewers for readiness gates. |
 | B-DM-006 | Runtime/stack/compliance decisions | E05 and any implementation-specific story | Storage, event transport, tenancy, compliance, runtime, UI, and provider choices remain open. | Defer implementation-specific claims or convert them into bounded architecture/security spikes. |
 | B-DM-007 | Source type and grounding priority | E06, E07, E08, E12 | MVP2 and legacy bridge planning cannot commit retrieval, freshness, or source-governance behavior. | Prioritize initial source types after MVP1 task-packet conventions stabilize. |
@@ -133,7 +132,7 @@ gates, and recommended refinement/implementation order for work items using the
 | Gate | Required before | Applies to | Dependency-map interpretation |
 | --- | --- | --- | --- |
 | G0 Canonical foundation readiness | MVP1 refinement/implementation fan-out | E01, then E02-E05 | E01 must be accepted before downstream epics are promoted beyond draft refinement. |
-| G1 MVP1 scope and mode gate | `mvp1-domain-infrastructure` or implementation launch | E02-E05 | Decide MVP1 delivery mode, first domain/initiative, metadata format, and initial validator scope. |
+| G1 MVP1 scope and mode gate | `mvp1-domain-infrastructure` or implementation launch | E02-E05 | Accepted for MVP1: CLI-assisted delivery, orchestration-framework domain, Markdown-first metadata, and initial deterministic validator scope. |
 | G2 Workflow/task-packet gate | Validation/completion-signal work | E02, E03, E05 | E02 must define workflow and task-packet contracts before E03 and E05 finalize dependent behavior. |
 | G3 Knowledge/persona gate | MVP2 | E06-E08 | Source inventory, persona composition, provenance, freshness, and review/promotion rules must be accepted. |
 | G4 Governance/feedback gate | MVP3 | E09-E11 | Workflow state, event/status mapping, approval classes, and feedback schema must be stable. |
@@ -146,9 +145,7 @@ gates, and recommended refinement/implementation order for work items using the
 
 1. **Finish E01 review**: confirm US-E01-001 through US-E01-005 and D-E01-001
    through D-E01-005 are accepted as the canonical foundation.
-2. **Resolve G1 minimum decisions**: choose MVP1 delivery mode, first
-   domain/initiative, minimum metadata/traceability contract, and initial
-   deterministic validator scope.
+2. **Proceed with E02 using accepted G1 decisions**: CLI-assisted delivery, the orchestration-framework domain, Markdown-first metadata, and the initial deterministic validator scope.
 3. **Refine E02**: sequence US-E02-001, then US-E02-002 and US-E02-003 with a
    single owner for shared metadata and write-target coordination.
 4. **Refine E04 in controlled parallel**: begin US-E04-001 after E01 acceptance;
@@ -184,8 +181,7 @@ This dependency map is ready for parent/integrator review when it:
 - Uses `E##` and `US-E##-###` IDs consistently.
 - Lists upstream dependencies, blockers, safe parallelism, unsafe sequencing,
   readiness gates, and recommended order.
-- Preserves uncertainty around MVP mode, first domain, metadata format,
-  validator scope, implementation stack, compliance, source types, and legacy
+- Preserves uncertainty around implementation stack, compliance, source types, and legacy
   corpus decisions.
 - Treats `raw/` and `research/` as immutable sources and does not require edits
   outside canonical `docs/` deliverables.

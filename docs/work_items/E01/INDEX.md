@@ -207,7 +207,7 @@ handoff work starts from reviewed contracts.
 | Dependency | Type | Status | Notes |
 | --- | --- | --- | --- |
 | Canonical PRD and FR IDs | Upstream requirement | Available | `PRODUCT_REQUIREMENTS.md` and `FUNCTIONAL_REQUIREMENTS.md` provide stable IDs for E01 traceability. |
-| MVP1 delivery mode decision | Product/architecture decision | Open | Blocks downstream sizing but does not block E01 documentation-foundation refinement. |
+| MVP1 delivery mode decision | Product/architecture decision | Accepted | CLI-assisted orchestration using the existing framework; runtime-backed product behavior deferred. |
 | First domain or internal initiative | Product decision | Open | If unresolved, use this repository's concept-to-implementation workflow as the internal MVP1 reference initiative. |
 | Metadata format | Product/technical decision | Open | Markdown tables are acceptable for refinement; machine-readable front matter remains a possible future enhancement. |
 
@@ -216,16 +216,18 @@ handoff work starts from reviewed contracts.
 | ID | Type | Item | Impact |
 | --- | --- | --- | --- |
 | A-E01-001 | Assumption | `docs/` is the canonical implementation-truth root for MVP1. | Enables E01-E05 to proceed without inventing external registry mechanics. |
-| A-E01-002 | Assumption | MVP1 can be refined as a documentation and CLI-assisted pipeline before runtime-backed product behavior is committed. | Keeps scope aligned to current source support. |
-| OQ-E01-001 | Open question | Should canonical artifact metadata be human-readable Markdown only or also machine-readable? | Affects E02 task packets and E03 validation. |
-| OQ-E01-002 | Open question | Which sponsor or role approves open-question resolution and story promotion? | Affects readiness governance for E04/E05. |
+| D-E01-001 | Decision | MVP1 delivery is CLI-assisted orchestration using the existing framework. | Unblocks E02 and constrains E05 handoff scope. |
+| D-E01-002 | Decision | The orchestration framework is the first MVP1 domain/initiative. | Gives E02/E04 concrete templates and backlog examples. |
+| D-E01-003 | Decision | MVP1 canonical metadata is Markdown-first, using structured headings and tables. | Unblocks task packets and validators; machine-readable schemas are deferred. |
+| D-E01-004 | Decision | Initial deterministic validators target files, sections, trace IDs, ID formats, source immutability, and completion signals. | Gives E03 a concrete validator scope. |
+| OQ-E01-002 | Open question | Which sponsor or role approves open-question resolution and story promotion? | Affects readiness governance for E04/E05; default role-based approvers are proposed in technical gates. |
 | OQ-E01-003 | Open question | What repository or workspace boundaries must future initiatives support? | Affects long-term canonical registry design. |
 
 ## Downstream handoff
 
 E01 is ready for downstream technical refinement when:
 
-- The canonical registry and metadata expectations are accepted by product,
+- The canonical registry and Markdown-first metadata expectations are accepted by product,
   architecture, and quality reviewers.
 - E01 stories retain PRD/FR traceability and visible assumptions/open questions.
 - Raw and research immutability remains explicit in story criteria.

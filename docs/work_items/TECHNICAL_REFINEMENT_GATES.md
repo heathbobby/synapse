@@ -236,17 +236,25 @@ Recommended final readiness record:
 | Dependency and concurrency |  |  |  |
 | Agent-output |  |  |  |
 
-## Open Questions for Backlog Refinement
+## Accepted MVP1 Backlog Refinement Decisions
 
-- Which metadata format will be canonical for epics, stories, task cards,
-  readiness gates, source links, and validation status?
-- Who approves each gate family for MVP1: product owner, technical lead,
-  architect, security/privacy reviewer, quality owner, dependency analyst, or
-  integrator?
-- Which deterministic validators should be implemented first for story metadata,
-  traceability, event-contract checklists, and agent-output completion signals?
-- Which MVP1 delivery mode is accepted: docs-only canonical pipeline,
-  CLI-assisted orchestration, or runtime-backed product slice?
-- Which first domain or internal initiative should drive concrete workflow
-  templates without prematurely constraining Synapse's domain-agnostic
-  architecture?
+- **Metadata format**: Markdown-first structured headings and tables are
+  canonical for MVP1 epics, stories, task cards, readiness gates, source links,
+  and validation status. Machine-readable schemas are deferred until an E03
+  validator spike proves the need.
+- **Delivery mode**: MVP1 is CLI-assisted orchestration using
+  `orchestration-framework/cli.py`, generated task cards, memos, and canonical
+  docs. Runtime-backed product behavior is deferred.
+- **First domain/initiative**: the orchestration framework itself drives the
+  first concrete workflow templates and task-packet examples.
+- **Initial validators**: required files, required sections/headings, PRD/FR
+  trace markers, E##/US-E##-### ID format, prohibited `raw/`/`research/`
+  modifications, and completion-signal format.
+
+## Remaining Open Questions for Backlog Refinement
+
+- Who approves each gate family for MVP1? Proposed defaults are product owner
+  for product/value, architect or tech lead for architecture/technical, QA or
+  standards curator for quality, dependency analyst for sequencing, security
+  architect when sensitive data or approval policy is involved, and integrator
+  for final ready-to-consume/merge status.

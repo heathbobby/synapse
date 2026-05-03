@@ -30,8 +30,8 @@ and orchestration handoff for one initiative.
 | Epic | Name | MVP | Readiness status | Requirement trace | Dependencies | Summary |
 | --- | --- | --- | --- | --- | --- | --- |
 | E01 | Canonical Documentation Foundation | MVP1 | Refined | PRD-001, PRD-002; FR-001, FR-002, FR-003, FR-004 | None | Establish canonical doc registry, source attribution, uncertainty labels, immutable-source handling, and open-question tracking. |
-| E02 | Workflow Definition and Task-Packet Model | MVP1 | Draft | PRD-003, PRD-005; FR-005, FR-006, FR-010 | E01 | Define workflow phases, roles, inputs, deliverables, completion criteria, and bounded agent task packets. |
-| E03 | Deterministic Validation and Completion Signals | MVP1 | Draft | PRD-003, PRD-005; FR-007, FR-008, FR-019 | E01, E02 | Specify objective validation hooks and standardized completion, partial-completion, blocked, and recovery signals. |
+| E02 | Workflow Definition and Task-Packet Model | MVP1 | Ready candidate | PRD-003, PRD-005; FR-005, FR-006, FR-010 | E01; ADR-0011; ADR-0012; ADR-0013 | Define CLI-assisted workflow phases, roles, inputs, deliverables, completion criteria, and bounded agent task packets for the orchestration-framework domain. |
+| E03 | Deterministic Validation and Completion Signals | MVP1 | Draft | PRD-003, PRD-005; FR-007, FR-008, FR-019 | E01, E02; ADR-0014 | Specify objective validation hooks and standardized completion, partial-completion, blocked, and recovery signals. |
 | E04 | Backlog Generation and Readiness Gates | MVP1 | Draft | PRD-008; FR-018, FR-019, FR-020 | E01; partial E02 | Generate traceable epics/stories with readiness gates, dependency notes, risks, and acceptance-quality criteria. |
 | E05 | Orchestration Execution Handoff | MVP1 | Draft | PRD-005, PRD-008; FR-005, FR-006, FR-008, FR-020 | E02, E03, E04 | Package accepted MVP1 contracts into an implementation handoff that states launch order, owners, recovery paths, and remaining blockers. |
 | E06 | Source Inventory and Grounding Model | MVP2 | Deferred | PRD-001, PRD-002, PRD-009; FR-003, FR-010, FR-021, FR-022 | E01, E02 | Prioritize source types and grounding mechanics for repeatable role-agent work. |
@@ -83,9 +83,8 @@ its epic deliverables or story detail:
 
 | ID | Type | Item | Impact |
 | --- | --- | --- | --- |
-| A-WI-001 | Assumption | If no external customer is selected, MVP1 uses this repository's concept-to-implementation workflow as the first internal initiative. | Allows backlog and workflow refinement to proceed without inventing market-specific scope. |
-| A-WI-002 | Assumption | MVP1 can begin as a documentation and CLI-assisted orchestration foundation rather than a runtime-backed product slice. | Keeps MVP1 aligned with the best-supported current sources. |
-| OQ-WI-001 | Open question | Is MVP1 expected to ship docs-only contracts, CLI-assisted workflow execution, or executable runtime behavior? | Blocks E05 implementation sizing and technical architecture commitment. |
-| OQ-WI-002 | Open question | Which user/domain should drive the first reusable workflow templates? | Blocks promotion of E02/E04 details from draft to ready candidate. |
-| OQ-WI-003 | Open question | What objective validators are required beyond file existence, required sections, and trace links? | Blocks E03 readiness. |
+| D-WI-001 | Decision | MVP1 delivery mode is CLI-assisted orchestration using `orchestration-framework/cli.py`, generated task cards, runtime memos, and canonical docs. | Unblocks E02 and sizes E05 around CLI-assisted handoff rather than runtime-backed product behavior. |
+| D-WI-002 | Decision | The orchestration framework is the first internal domain/initiative for MVP1 workflow templates. | Gives E02/E04 a concrete, source-backed domain without inventing an external customer. |
+| D-WI-003 | Decision | MVP1 metadata is Markdown-first: structured headings and tables with PRD/FR IDs, E##/US-E##-### IDs, confidence, readiness, dependency, owner/reviewer, and validation fields. | Unblocks task-packet and backlog metadata refinement while deferring machine-readable schemas. |
+| D-WI-004 | Decision | Initial validators target required files, required sections, trace markers, ID format, prohibited source mutations, and completion-signal format. | Unblocks E03 validator specification. |
 | OQ-WI-004 | Open question | What source types must be supported first for grounding after MVP1? | Blocks E06 and later MVP2 planning. |

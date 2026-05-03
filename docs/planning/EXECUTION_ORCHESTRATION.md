@@ -69,7 +69,7 @@ the blocking open questions in the PRD and backlog are answered. [S2, S4]
 | Sequence | Phase / MVP | Goal | Confidence | Primary backlog epics | Launch gate |
 | --- | --- | --- | --- | --- | --- |
 | 0 | Canonical foundation (`concept-extraction`) | Promote source inputs into canonical requirements, architecture, backlog, orchestration, and concurrency truth while preserving uncertainty. | High for process, medium for product specifics | E01 seed; planning docs | Source register complete; raw/research untouched; canonical docs distinguish source-backed facts, assumptions, open questions, and validation needs. |
-| 1 | MVP1: Canonical concept-to-implementation pipeline | Support one initiative moving from canonical docs to traceable backlog, workflow definitions, deterministic validation, and execution handoff. | Medium | E01, E02, E03, E04, E05 | G0 foundation accepted; first domain or internal initiative selected; MVP1 delivery mode decided (`docs-only`, `CLI-assisted`, or runtime-backed). |
+| 1 | MVP1: Canonical concept-to-implementation pipeline | Support one initiative moving from canonical docs to traceable backlog, workflow definitions, deterministic validation, and execution handoff. | Medium-high | E01, E02, E03, E04, E05 | G0 foundation accepted; G1 decisions recorded: CLI-assisted delivery, orchestration framework as first domain, Markdown-first metadata, initial deterministic validator scope. |
 | 2 | MVP2: Knowledge grounding and SME/persona templates | Add configurable source grounding, reusable persona templates, and domain configuration around the MVP1 pipeline. | Medium | E06, E07, E08 | MVP1 workflow/task-packet conventions stable; source types prioritized; persona composition decision made. |
 | 3 | MVP3: Monitoring, approvals, and feedback-loop hardening | Add visible workflow status, approval checkpoints, feedback capture, and improvement-promotion mechanics. | Medium-low | E09, E10, E11 | Workflow state and completion signals stable; approval policy classes defined; feedback schema accepted. |
 | 4 | MVP4: Legacy bridge workflow package | Apply Synapse to a validated legacy-to-greenfield transition scenario with bounded adapters and migration-planning artifacts. | Low | E12, E13 | Concrete legacy customer/domain, source corpus, compliance posture, and adapter boundaries validated. |
@@ -110,14 +110,20 @@ Required before launching MVP1 refinement:
 
 Required before `mvp1-domain-infrastructure`:
 
-- Decide whether MVP1 is documentation-only, CLI-assisted using the existing
-  orchestration framework, or an executable Synapse runtime slice. [S2, S4, S7]
-- Select the first user/domain/initiative that will drive workflow templates.
-  [S2, S4]
-- Confirm canonical metadata and traceability format for requirements, epics,
-  stories, decisions, and task packets. [S3, S4]
-- Identify initial deterministic validators beyond file existence/size where
-  feasible. [S3, S8]
+- **Accepted**: MVP1 delivery mode is CLI-assisted using the existing
+  orchestration framework. Runtime-backed product behavior is deferred until
+  MVP1 contracts and validators are stable. [ADR-0011]
+- **Accepted**: the orchestration framework itself is the first internal
+  domain/initiative that will drive workflow templates. [ADR-0012]
+- **Accepted**: MVP1 uses Markdown-first canonical metadata: structured
+  headings and tables for PRD/FR IDs, E##/US-E##-### IDs, source confidence,
+  readiness status, dependencies, owners/reviewers, and validation status.
+  Machine-readable front matter/schema extraction is deferred to a later spike
+  if E03 validators require it. [ADR-0013]
+- **Accepted**: initial deterministic validators should check required files,
+  required sections/headings, PRD/FR trace markers, E##/US-E##-### ID format,
+  prohibited `raw/`/`research/` modifications, and completion-signal format.
+  Review-only criteria remain labeled until automation is feasible. [ADR-0014]
 
 ### G2: Workflow/task-packet gate
 
@@ -176,21 +182,19 @@ Required before MVP4:
 
 ## 7. Next-Action Recommendations
 
-### Immediate, before launching MVP1
+### Immediate next actions after G1
 
-1. Review and accept or revise the canonical foundation set, especially open
-   questions in the PRD/backlog and open architecture decisions in the decision
-   log.
-2. Decide MVP1 delivery mode: **docs-only canonical pipeline**,
-   **CLI-assisted orchestration**, or **runtime-backed product slice**.
-3. Select the first domain/initiative for MVP1 templates. If no external
-   customer is ready, use this repository's concept-to-implementation workflow
-   as the internal reference domain.
-4. Define the initial metadata/traceability contract for work items:
-   requirement IDs, source confidence, dependencies, readiness gates, owner,
-   and validation status.
-5. Expand `docs/work_items/` from backlog seeds only after G0 is accepted, with
-   each story tracing to PRD/FR IDs and dependency gates.
+1. Refine E02 using the accepted G1 decisions: CLI-assisted delivery, the
+   orchestration framework as first domain, Markdown-first metadata, and the
+   initial deterministic validator scope.
+2. Draft the workflow/task-packet contract for the orchestration-framework
+   domain, including required fields, source packet conventions, role ownership,
+   write-target rules, and ready-to-consume memo shape.
+3. Prepare E04 backlog readiness updates in controlled parallel only where
+   write targets are disjoint and metadata terms are shared.
+4. Keep runtime-backed product behavior, visual designer implementation, concrete
+   storage/event/runtime choices, and external customer domains deferred until
+   later gates.
 
 ### Recommended MVP1 launch order
 

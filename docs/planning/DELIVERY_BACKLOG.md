@@ -70,7 +70,7 @@ the open questions in the PRD are resolved.
 | E02 | Workflow Definition and Iteration Model | Source-backed | PRD-003, PRD-005; FR-005, FR-006 | E01 | Confirm workflow authoring surface and configuration schema. |
 | E03 | Deterministic Validation and Completion Signals | Source-backed | PRD-003, PRD-005; FR-007, FR-008 | E01, E02 | Define Synapse-specific validators beyond file existence/size. |
 | E04 | Backlog Generation and Readiness Gates | Source-backed | PRD-008; FR-018, FR-019, FR-020 | E01 | Confirm initial MVP/domain/epic taxonomy. |
-| E05 | Orchestration Execution Handoff | Assumption | PRD-005; FR-005, FR-006, FR-020 | E02, E03, E04 | Decide whether MVP1 is docs-only, CLI-assisted, or includes runtime automation. |
+| E05 | Orchestration Execution Handoff | Source-backed + accepted decision | PRD-005; FR-005, FR-006, FR-020; ADR-0011 | E02, E03, E04 | Scope handoff around CLI-assisted orchestration; runtime automation remains deferred. |
 
 ### MVP2: Knowledge Grounding and SME Templates
 
@@ -163,8 +163,8 @@ Use these gates before promoting any story seed to implementation-ready status:
 | OQ ID | Question | Blocks |
 | --- | --- | --- |
 | OQ-BL-001 | What is the first deployment/product mode: internal platform, SaaS, open-core framework, or services-enabled tool? | MVP boundaries, NFRs, architecture, GTM. |
-| OQ-BL-002 | Which user/domain should drive MVP1 workflow templates? | E02, E04, E07, E08. |
-| OQ-BL-003 | Is MVP1 expected to ship executable software, canonical documentation, or a CLI-assisted workflow foundation? | E05 and implementation sizing. |
+| D-BL-001 | The orchestration framework itself is the first MVP1 domain/initiative for workflow templates. | E02, E04, E07, E08. |
+| D-BL-002 | MVP1 delivery mode is CLI-assisted workflow foundation using canonical documentation and the existing framework. | E05 and implementation sizing. |
 | OQ-BL-004 | What source systems/file types must be supported first? | E06 and FR-010. |
 | OQ-BL-005 | What approval model and autonomy limits are acceptable? | E09, E10, security architecture. |
 | OQ-BL-006 | Which compliance/security constraints apply before customer data is handled? | Architecture, NFRs, release planning. |

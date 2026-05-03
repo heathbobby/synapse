@@ -100,12 +100,12 @@ uncertainty so downstream work does not overcommit.
 | ID | Type | Question or assumption | Affected work | Blocking status |
 | --- | --- | --- | --- | --- |
 | A-E01-001 | Assumption | `docs/` is the MVP1 canonical implementation-truth root. | E01-E05 | Non-blocking for E01; revisit if architecture changes registry boundaries. |
-| A-E01-002 | Assumption | MVP1 can start as a documentation and CLI-assisted pipeline. | E02-E05 | Non-blocking for E01; blocks implementation sizing if rejected. |
-| OQ-E01-001 | Open question | Should canonical artifact metadata remain Markdown-only or become machine-readable? | E02, E03, E04 | Blocks validator and task-packet detail, not E01 refinement. |
-| OQ-E01-002 | Open question | Which sponsor or role approves story promotion and open-question closure? | E04, E05 | Blocks final readiness governance. |
+| D-E01-001 | Decision | MVP1 is CLI-assisted using `orchestration-framework/cli.py`, generated task cards, memos, and canonical docs. | E02-E05 | Accepted; runtime-backed Synapse product behavior is deferred. |
+| D-E01-002 | Decision | The orchestration framework is the first internal MVP1 domain/initiative. | E02, E04 | Accepted; use existing workflows, task cards, memos, and framework conventions as the template domain. |
+| D-E01-003 | Decision | MVP1 metadata remains Markdown-first with structured tables/headings. | E02, E03, E04 | Accepted; machine-readable front matter/schema extraction is deferred until validators require it. |
+| D-E01-004 | Decision | Initial deterministic validators target required files, required sections, PRD/FR trace markers, E##/US-E## ID format, prohibited source mutations, and completion-signal format. | E03, E04, E05 | Accepted; review-only criteria remain labeled. |
+| OQ-E01-002 | Open question | Which sponsor or role approves story promotion and open-question closure? | E04, E05 | Default role-based approvers are proposed, but sponsor override remains possible. |
 | OQ-E01-003 | Open question | What repository or workspace boundaries must future initiatives support? | E01, E06, E08 | Blocks long-term registry design, not MVP1 internal pipeline refinement. |
-| OQ-E01-004 | Open question | Is MVP1 docs-only, CLI-assisted, or runtime-backed? | E03, E05 | Blocks handoff sizing and implementation mode. |
-| OQ-E01-005 | Open question | Which first domain or initiative drives reusable MVP1 workflow templates? | E02, E04 | Blocks domain-specific workflow/backlog examples. |
 
 **Acceptance-quality criteria**
 
@@ -153,8 +153,8 @@ used as downstream implementation contracts.
 
 | Risk | Impact | Mitigation |
 | --- | --- | --- |
-| Metadata format churn | E02/E03 may need rework if Markdown tables later become machine-readable schemas. | Keep E01 human-readable but isolate machine-readable metadata as an open question. |
-| Hidden product-mode decision | E05 sizing may drift if docs-only, CLI-assisted, or runtime-backed expectations are not resolved. | Keep OQ-E01-004 visible as a blocker for handoff and implementation sizing. |
+| Metadata format churn | E02/E03 may need rework if Markdown tables later become machine-readable schemas. | Keep MVP1 Markdown-first and sequence schema/front matter extraction as a later validator-driven spike. |
+| Product-mode overreach | E05 could drift into runtime-backed product behavior despite CLI-assisted MVP1 scope. | Anchor E05 to CLI-assisted orchestration and explicitly defer runtime-backed behavior. |
 | Source mutation | Provenance and auditability degrade if seed files are edited. | Preserve immutable-source rule and hand off automation candidate to E03. |
 | Overcommitting future MVP scope | Persona, monitoring, approval, and legacy bridge details could leak into MVP1. | Mark E06-E13 as deferred and keep E01 scope limited to the canonical pipeline foundation. |
 
