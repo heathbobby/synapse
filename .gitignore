@@ -2,6 +2,12 @@
 # Generic Orchestration Framework
 # Orchestration runtime artifacts
 .orchestration/runtime/
+
+# Raw seed documents are immutable inputs. Keep placeholders, but do not commit
+# local founder/customer source documents unless intentionally archiving a seed set.
+raw/*
+!raw/.gitkeep
+
 # Git worktrees (multi-agent orchestration)
 # Worktrees should be outside repo (../Synapse.worktrees), but ignore if created inside
 .worktrees/

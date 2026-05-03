@@ -9,6 +9,7 @@ This repository uses `orchestration-framework/` plus project-specific workflow c
 ### Primary workflow
 
 - Workflow config: `.orchestration/config/workflows/synapse-artifact-factory.yaml`
+- Concept-to-implementation workflow: `.orchestration/config/workflows/synapse-concept-to-implementation.yaml`
 - Persona library: `.orchestration/config/agent-personas.yaml`
 - Source brief: `work_items/synapse-product-brief.md`
 - Artifact root: `docs/artifacts/`
@@ -50,3 +51,16 @@ missing evidence, and narrative gaps before treating any artifact as ready-to-me
 The phase-6 refinement loop must convert critique/gap-log findings into a
 revision backlog, refinement plan, updated decision/open-question logs, and a
 final readiness review.
+
+### Canonical documentation path
+
+Use `docs/` for implementation-ready truth:
+
+- `docs/requirements/`
+- `docs/architecture/`
+- `docs/planning/`
+- `docs/standards/`
+- `docs/work_items/`
+- `docs/refinement/`
+
+`docs/artifacts/` is strategy and discovery material. The concept-to-implementation workflow promotes those artifacts into canonical docs and backlog entries.

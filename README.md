@@ -48,3 +48,33 @@ Runtime task cards, memos, and iteration outputs are generated under
 
 See `docs/orchestration/artifact-factory-runbook.md` for the full operating
 model, artifact families, dry-run commands, and memo conventions.
+
+## Schedul-R concept-to-implementation operating model
+
+The repository also includes a Schedul-R-inspired workflow for moving from
+source material to implementation-ready documentation:
+
+```bash
+python3 orchestration-framework/cli.py execute "/orchestrator::start_workflow(synapse-concept-to-implementation, phase-0, concept-extraction)"
+```
+
+That workflow lives at
+`.orchestration/config/workflows/synapse-concept-to-implementation.yaml` and
+uses the boot files under `docs/refinement/`:
+
+- `MASTER_ORCHESTRATOR_INIT.md`
+- `agent-roles/MASTER_ORCHESTRATOR.md`
+- `ORCHESTRATION_PLAYBOOK.md`
+- `SCALABLE_ORCHESTRATION_PHILOSOPHY.md`
+- `APPLYING_LEARNINGS_PLAYBOOK.md`
+
+Key invariants copied from the Schedul-R process:
+
+- Raw seed material belongs in `raw/`, is protected by `.cursorignore`, and
+  should not be edited by agents.
+- Canonical truth lives under `docs/requirements`, `docs/architecture`,
+  `docs/planning`, `docs/standards`, and `docs/work_items`.
+- The orchestrator delegates deliverables to role agents; it does not author
+  implementation artifacts directly.
+- Iterations must close the feedback loop by updating templates, roles, or
+  process docs when recurring failures are found.

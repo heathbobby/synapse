@@ -49,6 +49,37 @@ python3 orchestration-framework/cli.py execute "/orchestrator::launch_agents(sou
 python3 orchestration-framework/cli.py execute "/integrator::evaluate_iteration(source-brief-normalization, dry-run)"
 ```
 
+## Schedul-R concept-to-implementation mode
+
+Use `synapse-concept-to-implementation` when the goal is not just the strategy
+artifact pack, but a Schedul-R-style path from seed material to
+implementation-ready MVP documentation.
+
+```bash
+python3 orchestration-framework/cli.py validate "/orchestrator::start_workflow(synapse-concept-to-implementation, phase-0, concept-extraction)"
+python3 orchestration-framework/cli.py execute "/orchestrator::start_workflow(synapse-concept-to-implementation, phase-0, concept-extraction)"
+```
+
+That workflow preserves the six-iteration cadence from the Schedul-R playbook:
+
+1. `concept-extraction`: normalize `raw/`, research notes, and the source brief
+   into canonical requirements, architecture, and backlog skeletons.
+2. `domain-infrastructure`: produce MVP/domain infrastructure documentation.
+3. `entities-models`: produce business entity and data model documentation.
+4. `integrations`: produce API and event integration documentation.
+5. `feature-specifications`: produce feature and workflow specifications.
+6. `quality-testing`: produce testing strategy and acceptance criteria.
+7. `release-operations`: produce operational runbook, deployment guide, release
+   notes, and implementation handoff.
+
+The Master Orchestrator boot files for this mode live in `docs/refinement/`.
+Attach these four files to a new Cursor chat and send `Begin orchestration.`:
+
+- `@docs/refinement/MASTER_ORCHESTRATOR_INIT.md`
+- `@docs/refinement/agent-roles/MASTER_ORCHESTRATOR.md`
+- `@docs/refinement/ORCHESTRATION_PLAYBOOK.md`
+- `@docs/refinement/SCALABLE_ORCHESTRATION_PHILOSOPHY.md`
+
 `start_workflow` writes runtime files under `.orchestration/runtime/`, which is
 gitignored. Synapse disables automatic worktree creation in `framework.yaml` so
 sample generation is safe in a normal checkout. Enable `worktrees.enabled` when

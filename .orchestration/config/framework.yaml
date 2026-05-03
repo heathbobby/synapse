@@ -94,8 +94,24 @@ validation:
   completion_criteria: true
 
 roles:
+  - master_orchestrator
   - artifact_orchestrator
   - requirements_strategist
+  - product_analyst
+  - architect
+  - tech_lead
+  - data_architect
+  - api_architect
+  - integration_architect
+  - product_owner
+  - qa_lead
+  - test_engineer
+  - tech_writer
+  - sre
+  - dependency_analyst
+  - concurrency_analyst
+  - standards_curator
+  - implementation_planner
   - market_intelligence_analyst
   - customer_researcher
   - competitive_intelligence_analyst
@@ -124,6 +140,35 @@ custom:
       - "docs/artifacts/OPEN_QUESTIONS.md"
   artifact_workflows:
     - synapse-artifact-factory
+    - synapse-concept-to-implementation
+  seed_inputs:
+    raw_dir: "raw"
+    extracts_dir: "docs/extracts"
+    immutable: true
+    cursor_ignored: true
+  canonical_documentation_root: "docs"
+  concept_to_implementation:
+    workflow: "synapse-concept-to-implementation"
+    operating_principles:
+      - "The master orchestrator delegates deliverables; it does not write them directly."
+      - "Each iteration uses the same generated scaffold: CONTEXT.md, COMPLETION_CRITERIA.md, README.md, task cards, outputs, feedback."
+      - "Monitoring, validation, and feedback collection are deterministic tool steps, not manual polling."
+      - "Repeated issues must become template, role, or process updates before the next iteration."
+    canonical_layers:
+      seeds: "raw"
+      extracts: "docs/extracts"
+      canonical_truth: "docs/{requirements,architecture,planning,standards}"
+      backlog: "docs/work_items"
+      mvp_specs: "docs/MVP{N}"
+      implementation_handoff: "docs/implementation"
+      refinement_machine: "docs/refinement"
+    mvp_iteration_cadence:
+      - "domain-infrastructure"
+      - "entities-models"
+      - "integrations"
+      - "feature-specifications"
+      - "quality-testing"
+      - "release-operations"
   artifact_families:
     root:
       - "docs/artifacts/ARTIFACT_INDEX.md"
