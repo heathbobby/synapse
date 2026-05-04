@@ -1,0 +1,41 @@
+---
+description: Agent-sync memo conventions (ready-to-consume workflow)
+---
+
+## agent-sync conventions
+
+All coordination memos live under:
+
+`/.orchestration/runtime/agent-sync/`
+
+### Memo requirements
+
+Include:
+
+- Date
+- Audience (`@integrator` etc.)
+- Status (`ready-to-consume` etc.)
+- Branch + SHA (when applicable)
+
+### Synapse role tags
+
+Use project-specific audience tags where useful:
+
+- `@artifact_orchestrator`
+- `@requirements_strategist`
+- `@customer_researcher`
+- `@market_intelligence_analyst`
+- `@competitive_intelligence_analyst`
+- `@gtm_strategist`
+- `@business_case_analyst`
+- `@technical_architect`
+- `@security_architect`
+- `@pitch_deck_strategist`
+- `@product_critic`
+- `@executive_editor`
+- `@integrator`
+
+### Handoffs
+
+When your work is safe for others to build on, post a `ready-to-consume` memo.
+

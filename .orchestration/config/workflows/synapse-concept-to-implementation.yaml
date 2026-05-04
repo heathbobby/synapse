@@ -1,0 +1,337 @@
+name: synapse-concept-to-implementation
+description: Schedul-R-style pipeline from immutable seeds to canonical truth, backlog, MVP documentation, and implementation
+  handoff.
+phases:
+- id: phase-0
+  name: Seed Extraction and Canonical Foundation
+  description: Normalize raw source inputs into canonical documents without editing raw seeds.
+  iterations:
+  - id: concept-extraction
+    name: Concept Extraction and Canonical Truth Drafting
+    description: Extract source context, initialize canonical docs, and define early epics/domains.
+    goal: 'Transform immutable raw inputs and project research into canonical
+
+      Markdown documents that future agents cite as the source of truth.
+
+      Preserve source uncertainty and initialize backlog/domain structure
+
+      without treating raw notes as final requirements.
+
+      '
+    agents:
+    - role: requirements_strategist
+      inputs:
+      - docs/refinement/iteration-inputs/concept-extraction.md
+      deliverables:
+      - path: docs/requirements/PRODUCT_REQUIREMENTS.md
+        description: Canonical product requirements, goals, non-goals, personas, and acceptance-quality requirements.
+      - path: docs/requirements/FUNCTIONAL_REQUIREMENTS.md
+        description: Functional capabilities, workflows, edge cases, constraints, and traceability to source inputs.
+      - path: docs/planning/DELIVERY_BACKLOG.md
+        description: Initial epic/MVP backlog with assumptions and readiness gaps.
+      token_budget: 36000
+    - role: architect
+      inputs:
+      - docs/refinement/iteration-inputs/concept-extraction.md
+      deliverables:
+      - path: docs/architecture/ARCHITECTURE.md
+        description: Initial platform architecture for Synapse as an operational substrate for agentic workforces.
+      - path: docs/architecture/TECHNICAL_SPECIFICATIONS.md
+        description: Implementation-agnostic technical specs, integration patterns, workflow runtime assumptions, and risk.
+      - path: docs/architecture/DECISIONS.md
+        description: Architecture decision log initialized from source assumptions.
+      token_budget: 38000
+    - role: dependency_analyst
+      inputs:
+      - docs/refinement/iteration-inputs/concept-extraction.md
+      deliverables:
+      - path: docs/planning/EXECUTION_ORCHESTRATION.md
+        description: Phase sequencing, dependencies, gates, and recovery paths.
+      - path: docs/planning/CONCURRENCY_ANALYSIS.md
+        description: Which agents/domains can run in parallel and which require strict sequencing.
+      token_budget: 24000
+    completion_criteria:
+      requirements:
+      - Canonical requirements, architecture, planning, and decision docs exist and cite source inputs.
+      - Raw seed or research files remain immutable; agents write only canonical docs outputs.
+      - Backlog identifies candidate MVPs, domains, and epics with explicit confidence and gaps.
+      - Concurrency analysis separates safe parallel work from sequential dependencies.
+- id: phase-1
+  name: Backlog Refinement
+  description: Convert canonical truth into implementation-ready epics and user stories.
+  iterations:
+  - id: backlog-refinement
+    name: Epic and User Story Refinement
+    description: Produce ready-for-implementation work item structure with gates.
+    goal: 'Create a backlog that engineers and agent teams can execute. Each
+
+      story should trace to canonical requirements, name dependencies, and
+
+      meet a ready-for-implementation quality gate.
+
+      '
+    agents:
+    - role: product_owner
+      inputs:
+      - docs/refinement/iteration-inputs/backlog-refinement.md
+      deliverables:
+      - path: docs/work_items/INDEX.md
+        description: Epic index organized by MVP, domain, priority, and readiness.
+      - path: docs/work_items/E01/INDEX.md
+        description: First epic index using the E## convention.
+      - path: docs/work_items/E01/DELIVERABLES.md
+        description: Definition of done and deliverables for the first epic.
+      token_budget: 30000
+    - role: tech_lead
+      inputs:
+      - docs/refinement/iteration-inputs/backlog-refinement.md
+      deliverables:
+      - path: docs/work_items/TECHNICAL_REFINEMENT_GATES.md
+        description: Technical readiness gates for user stories and task breakdowns.
+      - path: docs/standards/AI_AGENT_STANDARDS.md
+        description: Agent output, traceability, completion-signal, and review standards.
+      token_budget: 28000
+    - role: dependency_analyst
+      inputs:
+      - docs/refinement/iteration-inputs/backlog-refinement.md
+      deliverables:
+      - path: docs/work_items/DEPENDENCY_MAP.md
+        description: Story/epic dependencies, blockers, parallelization opportunities, and sequencing warnings.
+      token_budget: 22000
+    completion_criteria:
+      requirements:
+      - Work item structure uses E## and US-E##-### naming conventions.
+      - Each backlog artifact traces to canonical requirements and architecture documents.
+      - Readiness gates define product, technical, architecture, and quality approval criteria.
+      - Dependencies and concurrency constraints are explicit before MVP technical documentation begins.
+- id: phase-2
+  name: MVP Iteration 1 - Domain Infrastructure
+  description: The first standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-01-domain-infrastructure
+    name: MVP1 Domain Infrastructure
+    description: Define infrastructure shape and domain boundaries.
+    goal: 'Produce the infrastructure and domain overview artifacts that every
+
+      later MVP1 iteration depends on. Keep scope limited to MVP1 and mark
+
+      later capabilities as future, not implemented.
+
+      '
+    agents:
+    - role: architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-01-domain-infrastructure.md
+      deliverables:
+      - path: docs/MVP1/Platform/Overview.md
+        description: MVP1 platform domain overview, responsibilities, and boundaries.
+      - path: docs/MVP1/Platform/Infrastructure.md
+        description: Infrastructure, runtime, storage, messaging, observability, and deployment assumptions.
+      token_budget: 30000
+    completion_criteria:
+      requirements:
+      - MVP1 domain overview and infrastructure files exist with explicit in-scope and out-of-scope boundaries.
+      - Infrastructure references canonical architecture and standards rather than raw inputs.
+      - Future MVP capabilities are marked as future and not presented as implemented.
+- id: phase-3
+  name: MVP Iteration 2 - Entities and Models
+  description: The second standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-02-entities-models
+    name: MVP1 Entities and Data Models
+    description: Define business entities and data model for MVP1.
+    goal: 'Build on the infrastructure shape to document core entities, state,
+
+      ownership, data lifecycle, and data contracts for MVP1.
+
+      '
+    agents:
+    - role: tech_lead
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-02-entities-models.md
+      deliverables:
+      - path: docs/MVP1/Platform/BusinessEntities.md
+        description: Domain entities, invariants, lifecycle, validation, and ownership.
+      token_budget: 26000
+    - role: data_architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-02-entities-models.md
+      deliverables:
+      - path: docs/MVP1/Platform/DataModel.md
+        description: Logical data model, relationships, retention, indexing, migration, and data quality notes.
+      token_budget: 26000
+    completion_criteria:
+      requirements:
+      - Business entities and data model align with MVP1 infrastructure and functional requirements.
+      - Entity ownership, lifecycle, validation, and data relationships are explicit.
+      - Data model identifies unknowns and avoids stack commitments not supported by canonical decisions.
+- id: phase-4
+  name: MVP Iteration 3 - Integrations
+  description: The third standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-03-integrations
+    name: MVP1 API and Event Integrations
+    description: Define APIs, events, and external integration boundaries.
+    goal: 'Translate MVP1 entities and workflows into integration contracts,
+
+      including APIs, events, human approval points, and telemetry loops.
+
+      '
+    agents:
+    - role: api_architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-03-integrations.md
+      deliverables:
+      - path: docs/MVP1/Platform/Integrations.md
+        description: API boundaries, event flows, approval hooks, telemetry, and failure behavior.
+      token_budget: 28000
+    - role: integration_architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-03-integrations.md
+      deliverables:
+      - path: docs/standards/EVENT_CONTRACT_STANDARDS.md
+        description: Event naming, schema, versioning, idempotency, replay, and compatibility standards.
+      token_budget: 24000
+    completion_criteria:
+      requirements:
+      - Integrations describe synchronous, asynchronous, human-in-loop, and telemetry flows.
+      - Event contract standards are reusable by later MVP/domain iterations.
+      - Failure modes and ownership boundaries are documented.
+- id: phase-5
+  name: MVP Iteration 4 - Feature Specifications
+  description: The fourth standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-04-feature-specifications
+    name: MVP1 Feature Specifications and Workflows
+    description: Produce feature overview and workflow documents.
+    goal: 'Convert backlog and technical contracts into feature-level documents
+
+      that explain user value, workflows, edge cases, and implementation
+
+      implications.
+
+      '
+    agents:
+    - role: product_owner
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-04-feature-specifications.md
+      deliverables:
+      - path: docs/MVP1/Platform/Features/WorkflowDesigner/Overview.md
+        description: Feature goals, personas, requirements, scenarios, and acceptance framing.
+      token_budget: 26000
+    - role: tech_writer
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-04-feature-specifications.md
+      deliverables:
+      - path: docs/MVP1/Platform/Features/WorkflowDesigner/Workflows/CreateWorkflow.md
+        description: Step-by-step workflow narrative, edge cases, and operational notes.
+      token_budget: 22000
+    completion_criteria:
+      requirements:
+      - Feature overview links product value, requirements, integration points, and acceptance expectations.
+      - Workflow docs include happy path, alternate path, errors, approvals, and observability events.
+      - Feature specs remain within MVP1 scope.
+- id: phase-6
+  name: MVP Iteration 5 - Quality and Testing
+  description: The fifth standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-05-quality-testing
+    name: MVP1 Quality Strategy and Acceptance Criteria
+    description: Define test strategy and acceptance criteria.
+    goal: 'Create deterministic quality gates for MVP1 that future engineering
+
+      teams and agents can validate against.
+
+      '
+    agents:
+    - role: qa_lead
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-05-quality-testing.md
+      deliverables:
+      - path: docs/MVP1/Platform/TestingStrategy.md
+        description: Unit, integration, E2E, performance, accessibility, security, and data quality test strategy.
+      token_budget: 24000
+    - role: test_engineer
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-05-quality-testing.md
+      deliverables:
+      - path: docs/MVP1/Platform/AcceptanceCriteria.md
+        description: Acceptance criteria, test matrix, fixtures, validation commands, and traceability.
+      token_budget: 24000
+    completion_criteria:
+      requirements:
+      - Testing strategy covers product, integration, telemetry, security, and reliability concerns.
+      - Acceptance criteria are testable and trace to work items or requirements.
+      - Quality artifacts define what blocks implementation readiness.
+- id: phase-7
+  name: MVP Iteration 6 - Release and Operations
+  description: The sixth standard Schedul-R MVP iteration.
+  iterations:
+  - id: mvp1-iteration-06-release-operations
+    name: MVP1 Release Operations and Handoff
+    description: Produce operational runbook and release-readiness docs.
+    goal: 'Complete the MVP1 documentation set with operational readiness,
+
+      deployment, monitoring, incident, and release handoff guidance.
+
+      '
+    agents:
+    - role: sre
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-06-release-operations.md
+      deliverables:
+      - path: docs/MVP1/Platform/OperationalRunbook.md
+        description: Monitoring, alerts, incidents, rollback, capacity, dependencies, and operational ownership.
+      token_budget: 26000
+    - role: tech_writer
+      inputs:
+      - docs/refinement/iteration-inputs/mvp1-iteration-06-release-operations.md
+      deliverables:
+      - path: docs/MVP1/Platform/ReleaseNotes.md
+        description: Release scope, known limitations, operational caveats, and validation checklist.
+      - path: docs/implementation/IMPLEMENTATION_ROADMAP.md
+        description: Handoff roadmap summarizing MVP1 readiness, gaps, and next implementation steps.
+      token_budget: 26000
+    completion_criteria:
+      requirements:
+      - Operational runbook covers monitoring, alerting, incidents, rollback, dependencies, and ownership.
+      - Release notes and implementation roadmap synthesize MVP1 scope, gaps, and readiness.
+      - MVP1 can be audited end-to-end from requirements through operations.
+- id: phase-8
+  name: MVP2 Iteration 1 - Source Inventory and Grounding
+  description: Begin MVP2 by defining source inventory, grounding model, and knowledge-promotion standards.
+  iterations:
+  - id: mvp2-iteration-01-source-grounding
+    name: MVP2 Source Inventory and Grounding Model
+    description: Prioritize source types and define knowledge grounding contracts for repeatable SME agents.
+    goal: Define the first MVP2 knowledge-grounding foundation that can consume MVP1 canonical artifacts, classify source
+      types, preserve provenance and freshness, and prepare persona/template work without selecting a runtime knowledge store.
+    agents:
+    - role: data_architect
+      inputs:
+      - docs/refinement/iteration-inputs/mvp2-iteration-01-source-grounding.md
+      deliverables:
+      - path: docs/MVP2/Knowledge/SourceInventory.md
+        description: Prioritized source inventory, source classes, ownership, freshness, confidence, and MVP2 ingestion boundaries.
+      - path: docs/MVP2/Knowledge/GroundingModel.md
+        description: Technology-neutral knowledge grounding model with provenance, confidence, freshness, retrieval/use contracts,
+          and open decisions.
+      token_budget: 30000
+    - role: standards_curator
+      inputs:
+      - docs/refinement/iteration-inputs/mvp2-iteration-01-source-grounding.md
+      deliverables:
+      - path: docs/standards/KNOWLEDGE_GROUNDING_STANDARDS.md
+        description: Reusable standards for source promotion, evidence classes, SME grounding, freshness, review, and learning
+          promotion.
+      token_budget: 24000
+    completion_criteria:
+      requirements:
+      - Source inventory prioritizes MVP1 canonical docs, orchestration config, work items, standards, decisions, memos/log
+        references, and future raw/external sources.
+      - Grounding model defines provenance, confidence, freshness, review, promotion, and consumption contracts without choosing
+        storage or retrieval technology.
+      - Knowledge grounding standards describe how sources become approved knowledge and how repeated learnings update templates,
+        personas, workflows, or backlog gates.
+      - Future runtime knowledge store, retrieval, embeddings, tenancy, compliance, and source-system connectors are marked
+        open or future scope.

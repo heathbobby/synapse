@@ -1,0 +1,209 @@
+# Generic Orchestration Framework Configuration (Project)
+
+project:
+  name: "Synapse"
+  trunk_branch: "main"
+  description: "Artifact-driven multi-agent refinement for Synapse product, market, GTM, business, pitch, and architecture work."
+
+coordination:
+  agent_sync_dir: ".orchestration/runtime/agent-sync"
+  memo_format: "YYYY-MM-DD_{role}_{topic}.md"
+  status_values:
+    - draft
+    - ready-to-consume
+    - ready-to-merge
+    - blocked
+
+worktrees:
+  enabled: false
+  location: "../Synapse.worktrees"
+  cleanup_on_merge: true
+  branch_prefix: "cursor"
+
+orchestration:
+  workflows_dir: ".orchestration/config/workflows"
+  iterations_dir: ".orchestration/runtime/iterations"
+  work_items_dir: "work_items"
+  framework_dir: "orchestration-framework"
+  allow_auto_apply_ready: false
+  
+integration:
+  target_branch_pattern: "integration/{date}"
+  merge_gates:
+    - validate_deliverables
+    - check_token_budget
+    - check_test_coverage
+  auto_merge_to_trunk: false
+
+commands:
+  task_cards_dir: ".orchestration/runtime/agent-sync/tasks"
+  task_archive_dir: ".orchestration/runtime/agent-sync/tasks/_archive"
+
+knowledge:
+  knowledge_dir: ".orchestration/knowledge"
+  evaluations_dir: ".orchestration/knowledge/evaluations"
+  iterations_dir: ".orchestration/knowledge/iterations"
+
+status:
+  status_dir: ".orchestration/runtime/status"
+
+updates:
+  source:
+    type: "git"
+    repo: "https://github.com/heathbobby/cursor_orchestrator.git"
+    ref: "main"
+  # Minimal payload to keep the target project lean.
+  payload:
+    - "bootstrap.py"
+    - "cli.py"
+    - "requirements.txt"
+    - "config.yaml.example"
+    - "templates"
+    - "tools"
+
+providers:
+  github:
+    api_base: "https://api.github.com"
+    token_env_var: "GITHUB_TOKEN"
+    default_repo: null # e.g. "owner/name"
+    default_state: "open"
+    per_page: 100
+    max_issues: 200
+    include_pull_requests: false
+    dest_subdir: "github/issues"
+
+token_budget:
+  default_per_agent: 20000
+  risk_thresholds:
+    low: 70      # <70% utilization
+    medium: 85   # 70-85% utilization
+    high: 100    # 85-100% utilization
+
+cursor:
+  enabled: true
+  rules_dir: ".cursor/rules"
+  auto_open_worktrees: false
+  boot_prompts_in_worktree: true
+  agent_command: "agent"
+  agent_output_format: "text"
+  agent_max_parallel: 3
+
+validation:
+  file_existence: true
+  file_size_min: 100  # bytes
+  completion_criteria: true
+
+roles:
+  - master_orchestrator
+  - artifact_orchestrator
+  - requirements_strategist
+  - product_analyst
+  - architect
+  - tech_lead
+  - data_architect
+  - api_architect
+  - integration_architect
+  - product_owner
+  - qa_lead
+  - test_engineer
+  - tech_writer
+  - sre
+  - dependency_analyst
+  - concurrency_analyst
+  - standards_curator
+  - implementation_planner
+  - market_intelligence_analyst
+  - customer_researcher
+  - competitive_intelligence_analyst
+  - gtm_strategist
+  - business_case_analyst
+  - pitch_deck_strategist
+  - technical_architect
+  - security_architect
+  - product_critic
+  - executive_editor
+
+custom:
+  artifact_root: "docs/artifacts"
+  source_brief: "work_items/synapse-product-brief.md"
+  source_brief_conventions:
+    canonical_id: "SYN-BRIEF-001"
+    expected_sections:
+      - Purpose
+      - Current Known Context
+      - Artifact Goals
+      - Working Assumptions
+      - Inputs to Add Later
+    normalization_outputs:
+      - "docs/artifacts/ARTIFACT_INDEX.md"
+      - "docs/artifacts/DECISION_LOG.md"
+      - "docs/artifacts/OPEN_QUESTIONS.md"
+  artifact_workflows:
+    - synapse-artifact-factory
+    - synapse-concept-to-implementation
+  seed_inputs:
+    raw_dir: "raw"
+    extracts_dir: "docs/extracts"
+    immutable: true
+    cursor_ignored: true
+  canonical_documentation_root: "docs"
+  concept_to_implementation:
+    workflow: "synapse-concept-to-implementation"
+    operating_principles:
+      - "The master orchestrator delegates deliverables; it does not write them directly."
+      - "Each iteration uses the same generated scaffold: CONTEXT.md, COMPLETION_CRITERIA.md, README.md, task cards, outputs, feedback."
+      - "Monitoring, validation, and feedback collection are deterministic tool steps, not manual polling."
+      - "Repeated issues must become template, role, or process updates before the next iteration."
+    canonical_layers:
+      seeds: "raw"
+      extracts: "docs/extracts"
+      canonical_truth: "docs/{requirements,architecture,planning,standards}"
+      backlog: "docs/work_items"
+      mvp_specs: "docs/MVP{N}"
+      implementation_handoff: "docs/implementation"
+      refinement_machine: "docs/refinement"
+    mvp_iteration_cadence:
+      - "domain-infrastructure"
+      - "entities-models"
+      - "integrations"
+      - "feature-specifications"
+      - "quality-testing"
+      - "release-operations"
+  artifact_families:
+    root:
+      - "docs/artifacts/ARTIFACT_INDEX.md"
+      - "docs/artifacts/DECISION_LOG.md"
+      - "docs/artifacts/OPEN_QUESTIONS.md"
+      - "docs/artifacts/EXECUTIVE_SUMMARY.md"
+      - "docs/artifacts/ARTIFACT_GAP_LOG.md"
+    requirements: "docs/artifacts/requirements"
+    customer: "docs/artifacts/customer"
+    market: "docs/artifacts/market"
+    gtm: "docs/artifacts/gtm"
+    business: "docs/artifacts/business"
+    architecture: "docs/artifacts/architecture"
+    pitch: "docs/artifacts/pitch"
+    reviews: "docs/artifacts/reviews"
+    refinement: "docs/artifacts/refinement"
+  workflow_sequence:
+    - phase: "phase-0"
+      iteration: "source-brief-normalization"
+      purpose: "Normalize source brief, artifact index, decisions, and open questions."
+    - phase: "phase-1"
+      iteration: "discovery-foundation"
+      purpose: "Generate requirements, personas, JTBD, assumptions, and customer research."
+    - phase: "phase-2"
+      iteration: "market-positioning"
+      purpose: "Generate market sizing, competitive analysis, positioning, and differentiation."
+    - phase: "phase-3"
+      iteration: "commercial-strategy"
+      purpose: "Generate GTM, pricing, launch, business case, revenue, unit economics, and risk artifacts."
+    - phase: "phase-4"
+      iteration: "technical-architecture"
+      purpose: "Generate architecture, data/integration, roadmap, security, threat, and compliance artifacts."
+    - phase: "phase-5"
+      iteration: "pitch-and-executive-synthesis"
+      purpose: "Generate pitch outline, investor narrative/Q&A, executive summary, and gap log."
+    - phase: "phase-6"
+      iteration: "refinement-review-loop"
+      purpose: "Turn critique/gap logs into revision backlog, refinement plan, and final readiness review."

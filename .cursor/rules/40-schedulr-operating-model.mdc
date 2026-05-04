@@ -1,0 +1,27 @@
+---
+description: Schedul-R-derived concept-to-implementation orchestration invariants
+---
+
+## Schedul-R operating model for Synapse
+
+Synapse adapts the Schedul-R concept-to-implementation process. Preserve these invariants:
+
+1. The Master Orchestrator delegates deliverables to role agents; it does not write canonical artifacts itself.
+2. Every iteration uses the same skeleton: `CONTEXT.md`, `COMPLETION_CRITERIA.md`, `README.md`, task cards, outputs, validation, and feedback.
+3. Use deterministic framework commands for generation, launch, monitoring, validation, evaluation, and integration. Do not replace them with manual sleep/poll/check loops.
+4. Feedback closes the loop. A repeated defect must update a template, role definition, workflow, or playbook before the next similar iteration.
+5. Raw seed files in `raw/` are immutable inputs. Read or extract them; never edit them.
+6. Canonical truth lives in `docs/requirements`, `docs/architecture`, `docs/planning`, `docs/standards`, `docs/work_items`, `docs/MVP*`, and `docs/implementation`.
+
+Primary boot files:
+
+- `docs/refinement/MASTER_ORCHESTRATOR_INIT.md`
+- `docs/refinement/agent-roles/MASTER_ORCHESTRATOR.md`
+- `docs/refinement/ORCHESTRATION_PLAYBOOK.md`
+- `docs/refinement/SCALABLE_ORCHESTRATION_PHILOSOPHY.md`
+- `docs/refinement/APPLYING_LEARNINGS_PLAYBOOK.md`
+
+Primary workflows:
+
+- Strategy artifact pipeline: `.orchestration/config/workflows/synapse-artifact-factory.yaml`
+- Concept-to-implementation pipeline: `.orchestration/config/workflows/synapse-concept-to-implementation.yaml`
